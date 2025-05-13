@@ -2,6 +2,7 @@
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
+User.create!(email: "example@gmail.com", password: "123456", password_confirmation: "123456")
 # Example:
 
 require 'faker'
@@ -9,7 +10,8 @@ require 'faker'
 30.times do
   Course.create!(
     title: Faker::Educator.course_name,
-    description: Faker::TvShows::GameOfThrones.quote
+    description: Faker::TvShows::GameOfThrones.quote,
+    user_id: User.first.id
   )
 end
 
