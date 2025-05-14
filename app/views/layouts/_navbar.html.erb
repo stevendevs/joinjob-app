@@ -2,25 +2,46 @@
   <!-- Izquierda: Logo + Links + Buscador -->
   <div class="flex flex-1 items-center space-x-6">
     <!-- Logo -->
+
+
+
+
+    <%= link_to users_path, class: 'nav-link flex items-center space-x-2 text-gray-700 hover:text-blue-500' do %>
+      <i class="fa fa-users"></i>
+      <span>Users</span>
+    <% end %>
+    
     <%= link_to "JoinJob", root_path, class: "text-white text-3xl font-extrabold" %>
 
     <!-- Link a Cursos -->
     <%= link_to "Courses", courses_path, class: "text-white text-lg font-semibold hover:underline" %>
 
     <!-- Buscador -->
-    <form class="flex items-center w-full max-w-xs ml-4">
+    
+
+
+    <%= form_tag(courses_path, method: :get, class: "flex items-center w-full max-w-xs ml-4") do %>
       <div class="relative w-full">
-        <input type="search" id="search-dropdown" placeholder="Buscar..."
-          class="block w-full p-2 pr-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+        <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Buscar...",
+            class: "block w-full p-2 pr-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" %>
+    
         <button type="submit"
           class="absolute right-0 top-0 bottom-0 px-3 text-sm font-medium text-white bg-blue-600 rounded-r-lg hover:bg-blue-700 focus:ring-2 focus:outline-none focus:ring-blue-300">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-6-6m0 0A7 7 0 1 0 9 9a7 7 0 0 0 6 6z" />
+                  d="M21 21l-6-6m0 0A7 7 0 1 0 9 9a7 7 0 0 0 6 6z" />
           </svg>
         </button>
       </div>
-    </form>
+    <% end %>
+    
+
+
+
+
+
+
+
   </div>
 
   <!-- Derecha: Carrito + Perfil -->
