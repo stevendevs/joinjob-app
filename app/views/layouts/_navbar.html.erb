@@ -1,49 +1,43 @@
-<div class="navbar dark:bg-black bg-joinjob-yellow shadow-sm">
-  <div class="flex-1 flex space-x-4">
-   
-    <%= link_to "JoinJob", root_path, class:"text-gray-900 text-3xl font-extrabold md:text-5xl lg:text-3xl"  %>
- 
+<div class="navbar dark:bg-black bg-joinjob-yellow shadow-sm px-4 py-2">
+  <!-- Izquierda: Logo + Links + Buscador -->
+  <div class="flex flex-1 items-center space-x-6">
+    <!-- Logo -->
+    <%= link_to "JoinJob", root_path, class: "text-white text-3xl font-extrabold" %>
 
+    <!-- Link a Cursos -->
+    <%= link_to "Courses", courses_path, class: "text-white text-lg font-semibold hover:underline" %>
 
-
-
-    <div class="form-inline my-2 my-lg-0 ">
-    <%= form_tag(courses_path, method: :get, class: "input-group flex") do %>
-      <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search courses", class: 'form-control form-control-sm' %>
-      <div class="input-group-append ml-2">
-        <button type="submit" class="btn btn-sm btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Buscador -->
+    <form class="flex items-center w-full max-w-xs ml-4">
+      <div class="relative w-full">
+        <input type="search" id="search-dropdown" placeholder="Buscar..."
+          class="block w-full p-2 pr-10 text-sm text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+        <button type="submit"
+          class="absolute right-0 top-0 bottom-0 px-3 text-sm font-medium text-white bg-blue-600 rounded-r-lg hover:bg-blue-700 focus:ring-2 focus:outline-none focus:ring-blue-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              d="M21 21l-6-6m0 0A7 7 0 1 0 9 9a7 7 0 0 0 6 6z" />
           </svg>
         </button>
       </div>
-    <% end %>
-  </div>
-  
-
-
-
-
-
-
-
-
+    </form>
   </div>
 
-  <div class="flex-none">
+  <!-- Derecha: Carrito + Perfil -->
+  <div class="flex items-center space-x-4">
     <!-- Carrito -->
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
         <div class="indicator">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
           <span class="badge badge-sm indicator-item">8</span>
         </div>
       </div>
-      <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+      <div tabindex="0" class="dropdown-content card card-compact mt-3 w-52 shadow bg-base-100 z-10">
         <div class="card-body">
           <span class="text-lg font-bold">8 Items</span>
           <span class="text-info">Subtotal: $999</span>
@@ -63,14 +57,11 @@
         </div>
       </div>
       <ul tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        class="menu menu-sm dropdown-content mt-3 w-52 p-2 shadow bg-base-100 rounded-box z-10">
         <% if current_user %>
           <li class="px-4 py-2 text-gray-700 font-medium border-b"><%= current_user.email %></li>
           <li><%= link_to 'Account settings', edit_user_registration_path, class: "hover:text-blue-600" %></li>
-          <li>
-          <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "hover:text-red-600" %>
-        </li>
-        
+          <li><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "hover:text-red-600" %></li>
         <% else %>
           <li><%= link_to 'Sign Up', new_user_registration_path, class: "hover:text-green-600" %></li>
           <li><%= link_to 'Log In', new_user_session_path, class: "hover:text-blue-600" %></li>
