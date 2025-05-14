@@ -1,5 +1,253 @@
 <div class="w-full">
-  <h1 class="font-bold text-4xl text-center">Vroad</h1>
-  <%= link_to "Courses", courses_path, class:"text-sky-500 hover:underline font-bold text-4xl"%>
+  <div class="hero bg-base-200 py-16">
+    <div class="hero-content text-center">
+      <div class="max-w-md space-y-6">
+
+        <!-- Encabezado llamativo -->
+        <h2 class="text-5xl font-bold">
+          This is <span class="px-2 text-white bg-indigo-600 rounded">heading</span> 👋
+        </h2>
+
+        <!-- Formulario de búsqueda -->
+        <%= form_tag(courses_path, method: :get, class: "flex justify-center items-center gap-2") do %>
+          <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search courses",
+              class: 'input input-sm input-bordered w-full max-w-xs' %>
+
+          <button type="submit" class="btn btn-sm btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+  <!-- Card 1: Total Courses -->
+  <div class="card bg-base-100 shadow-md p-6 text-center">
+    <h1 class="text-4xl text-primary mb-2">
+      <i class="fa fa-graduation-cap"></i>
+    </h1>
+    <p class="text-3xl font-bold"><%= Course.count %></p>
+    <p class="text-gray-600">Online Courses</p>
+    <div class="mt-2 text-sm text-gray-400">Explore a variety of fresh topics</div>
+  </div>
+
+  <!-- Card 2: Instructors -->
+  <div class="card bg-base-100 shadow-md p-6 text-center">
+    <h1 class="text-4xl text-primary mb-2">
+      <i class="fa fa-chalkboard-teacher"></i>
+    </h1>
+    <p class="text-3xl font-bold"><%= Course.distinct.count(:user_id) %></p>
+    <p class="text-gray-600">Expert Instructors</p>
+    <div class="mt-2 text-sm text-gray-400">Find the right instructor for you</div>
+  </div>
+
+  <!-- Card 3: Active Learners -->
+  <div class="card bg-base-100 shadow-md p-6 text-center">
+    <h1 class="text-4xl text-primary mb-2">
+      <i class="fa fa-user-graduate"></i>
+    </h1>
+    <p class="text-3xl font-bold"><%= User.count %></p>
+    <p class="text-gray-600">Active Learners</p>
+    <div class="mt-2 text-sm text-gray-400">Join the knowledge sharing community</div>
+  </div>
+
+  <!-- Card 4: Lifetime Access -->
+  <div class="card bg-base-100 shadow-md p-6 text-center">
+    <h1 class="text-4xl text-primary mb-2">
+      <i class="fa fa-infinity"></i>
+    </h1>
+    <p class="text-3xl font-bold">Lifetime Access</p>
+    <p class="text-gray-600">Learn Anytime</p>
+    <div class="mt-2 text-sm text-gray-400">Learn on your schedule</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="text-3xl font-bold text-white">Newest Courses</h2>
+
+<div class="w-full">
+  <% if @latest_courses.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <% @latest_courses.each do |course| %>
+        <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
+          <div class="card-body">
+            <h2 class="card-title text-neutral dark:text-white">
+              <%= link_to course.title, course_path(course), class: "hover:underline" %>
+            </h2>
+            <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
+            <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") %></p>
+
+            <div class="card-actions justify-end mt-4">
+              <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
+              <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
+              <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
+
+<h2 class="text-3xl font-bold text-white" >
+Popular
+</h2>
+<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
+
+<div class="w-full">
+<% if @courses.any? %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <% @courses.each do |course| %>
+      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
+        <div class="card-body">
+        
+        <h2 class="card-title text-neutral dark:text-white">
+<%= link_to course.title, course_path(course), class: "hover:underline" %>
+</h2>
+
+          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
+          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
+
+          <div class="card-actions justify-end mt-4">
+            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
+            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
+            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
+<% end %>
+</div>
+
+<h2 class="text-3xl font-bold text-white" >
+Top rating
+</h2>
+
+<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
+
+
+<div class="w-full">
+<% if @courses.any? %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <% @courses.each do |course| %>
+      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
+        <div class="card-body">
+        
+        <h2 class="card-title text-neutral dark:text-white">
+<%= link_to course.title, course_path(course), class: "hover:underline" %>
+</h2>
+
+          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
+          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
+
+          <div class="card-actions justify-end mt-4">
+            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
+            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
+            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
+<% end %>
+</div>
+
+
+
+<h2 class="text-3xl font-bold text-white" >
+newest
+</h2>
+
+
+
+<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
+
+
+
+
+
+
+
+<div class="w-full">
+<% if @courses.any? %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <% @courses.each do |course| %>
+      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
+        <div class="card-body">
+        
+        <h2 class="card-title text-neutral dark:text-white">
+<%= link_to course.title, course_path(course), class: "hover:underline" %>
+</h2>
+
+          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
+          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
+
+          <div class="card-actions justify-end mt-4">
+            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
+            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
+            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
+<% end %>
+</div>
+
+
+
+
+
+
+
+</div>
+</div>
+
 
 </div>
