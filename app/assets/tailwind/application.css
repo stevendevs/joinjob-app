@@ -14,3 +14,11 @@
 @plugin "./daisyui-theme.js"{
   /* custom theme here */
 }
+
+
+
+
+@theme {
+  --color-joinjob-yellow: #FFD700; 
+  --color-joinjob-dark-yellow: #D6E2F1; 
+}
