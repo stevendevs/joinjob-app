@@ -6,7 +6,7 @@ class Course < ApplicationRecord
   # Usamos un solo `friendly_id`, con método personalizado
   friendly_id :generated_slug, use: :slugged
 
-  validates :title, presence: true
+  validates :title, :short_description, :language, :price, :level,  presence: true
   validates :description, presence: true, length: { minimum: 5 }
 
   def to_s

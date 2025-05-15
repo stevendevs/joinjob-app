@@ -30,5 +30,28 @@
       <span class="font-medium"><%= 'last_sign_in_ip'.humanize %>:</span>
       <span><%= user.last_sign_in_ip %></span>
     </div>
+   
+
+
+
+    <div class="mt-4 border-t pt-3 flex items-center space-x-2 text-sm font-semibold text-gray-700">
+      <span>Confirmed email?</span>
+      <% if user.confirmed_at.present? %>
+        <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+          Yes
+        </span>
+      <% else %>
+        <span class="inline-block bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded-full">
+          No
+        </span>
+      <% end %>
+    </div>
+
+
+
+
+
+
+
   </div>
 </div>
