@@ -1,5 +1,5 @@
 <% content_for :title, "Courses" %>
-
+<%= turbo_frame_tag :dashboard do %>
 <div class="flex flex-col w-full">
   <div class="flex justify-between items-center mb-4">
     <h1 class="font-bold text-4xl text-center">Courses: <%= @courses.count %></h1>
@@ -11,7 +11,7 @@
   </div>
 
   <% if @courses.any? %>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
       <% @courses.each do |course| %>
         <div id="<%= dom_id course %>" class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content w-full my-5">
           <div class="card-body space-y-2">
@@ -60,3 +60,4 @@
     <p class="text-center my-10">No courses found.</p>
   <% end %>
 </div>
+<% end %>
