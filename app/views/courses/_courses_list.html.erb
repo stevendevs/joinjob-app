@@ -1,0 +1,9 @@
+<% if courses.any? %>
+  <ul>
+    <% courses.each do |course| %>
+      <li><%= course.title %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No courses found.</p>
+<% end %>
