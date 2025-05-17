@@ -1,5 +1,9 @@
+
+<%= turbo_frame_tag :dashboard do %>
+
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
   <% @users.each do |user| %>
     <%= render 'users/user', user: user %>
   <% end %>
-</div>
+  </div>
+  <% end %>
