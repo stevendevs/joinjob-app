@@ -122,6 +122,8 @@ GEM
     ffi (1.17.2-arm-linux-musl)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -228,6 +230,11 @@ GEM
     psych (5.2.6)
       date
       stringio
+    public_activity (3.0.1)
+      actionpack (>= 6.1.0)
+      activerecord (>= 6.1)
+      i18n (>= 0.5.0)
+      railties (>= 6.1.0)
     public_suffix (6.0.2)
     puma (6.6.0)
       nio4r (~> 2.0)
@@ -324,6 +331,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_form (5.3.1)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     solid_cable (3.0.8)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -406,6 +416,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   faker (~> 3.5)
+  friendly_id (~> 5.5)
   hotwire-livereload (~> 2.0)
   image_processing (~> 1.2)
   importmap-rails
@@ -413,10 +424,12 @@ DEPENDENCIES
   kamal
   pg (~> 1.1)
   propshaft
+  public_activity (~> 3.0)
   puma (>= 5.0)
   rails (~> 8.0.2)
   rubocop-rails-omakase
   selenium-webdriver
+  simple_form (~> 5.3)
   solid_cable
   solid_cache
   solid_queue

@@ -1,0 +1,28 @@
+<h1 class="pt-16">Activity</h1>
+
+
+<h3 class="text-center">
+  Activity
+  <span class="badge badge-info">
+    <!-- Aquí va el conteo de actividades -->
+    <!-- Por ejemplo, si usas ERB: -->
+    <%= @activities.count %>
+  </span>
+</h3>
+
+<p></p>
+
+<ul class="list-group">
+  <% @activities.each do |activity| %>
+    <li class="list-group-item">
+      <span><%= activity.id %></span>
+      <span><%= activity.trackable_type %></span>
+      <span><%= activity.trackable_id %></span>
+      <span><%= link_to activity.trackable, activity.trackable %></span>
+      <span><%= activity.key %></span>
+      <span><%= activity.parameters %></span>
+      <span><%= activity.owner %></span>
+    </li>
+  <% end %>
+</ul>
+

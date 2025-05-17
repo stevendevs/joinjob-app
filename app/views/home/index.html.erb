@@ -1,253 +1,275 @@
-<div class="w-full">
-  <div class="hero bg-base-200 py-16">
-    <div class="hero-content text-center">
-      <div class="max-w-md space-y-6">
 
-        <!-- Encabezado llamativo -->
-        <h2 class="text-5xl font-bold">
-          This is <span class="px-2 text-white bg-indigo-600 rounded">heading</span> 👋
-        </h2>
 
-        <!-- Formulario de búsqueda -->
-        <%= form_tag(courses_path, method: :get, class: "flex justify-center items-center gap-2") do %>
-          <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search courses",
-              class: 'input input-sm input-bordered w-full max-w-xs' %>
 
-          <button type="submit" class="btn btn-sm btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-        <% end %>
+<div class="min-h-screen pt-16 ">
+<!-- Main 3-column layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 max-w-screen-2xl mx-auto px-4">
+  
+  <!-- Left Sidebar (Empty for now) -->
+  <aside class="hidden lg:block lg:col-span-2 sticky top-4 self-start">
+    <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+      <!-- Left sidebar content will go here -->
+      <h3 class="font-bold text-lg mb-4">Navigation</h3>
+      <ul class="space-y-2">
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Home</li>
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Explore</li>
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Notifications</li>
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Messages</li>
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Bookmarks</li>
+        <li class="p-2 hover:bg-gray-50 rounded-md cursor-pointer">Profile</li>
+      </ul>
+    </div>
+  </aside>
+  
+  <!-- Main Content (Middle Column) -->
+  <main class="lg:col-span-7 space-y-6">
+    <!-- Hero Section -->
+    <div class="w-full bg-gray-50 rounded-xl py-16 mb-6">
+      <div class="text-center max-w-3xl mx-auto px-4">
+        <div class="space-y-6">
+          <!-- Heading -->
+          <h2 class="text-4xl md:text-5xl font-bold text-gray-900">
+            This is <span class="px-2 text-white bg-blue-600 rounded">heading</span> 👋
+          </h2>
 
+          <!-- Search Form -->
+          <form class="flex justify-center items-center gap-2 mt-6">
+            <input type="text" placeholder="Search courses" 
+                class="w-full max-w-xs px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+
+            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  
 
+    <!-- Newest Courses Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Newest Courses</h2>
 
+      <div class="w-full">
+      <% if @latest_courses.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-6">
+        <% @latest_courses.each do |course| %>
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">
+                <%= link_to course.title, course_path(course), class: "hover:text-blue-600 transition-colors" %>
+              </h2>
+              <p class="text-xs text-gray-500 mt-2">Created by: <%= course.user %></p>
+              <p class="text-xs text-gray-500">Created at: <%= course.created_at.strftime("%b %d, %Y") %></p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
-  <!-- Card 1: Total Courses -->
-  <div class="card bg-base-100 shadow-md p-6 text-center">
-    <h1 class="text-4xl text-primary mb-2">
-      <i class="fa fa-graduation-cap"></i>
-    </h1>
-    <p class="text-3xl font-bold"><%= Course.count %></p>
-    <p class="text-gray-600">Online Courses</p>
-    <div class="mt-2 text-sm text-gray-400">Explore a variety of fresh topics</div>
-  </div>
-
-  <!-- Card 2: Instructors -->
-  <div class="card bg-base-100 shadow-md p-6 text-center">
-    <h1 class="text-4xl text-primary mb-2">
-      <i class="fa fa-chalkboard-teacher"></i>
-    </h1>
-    <p class="text-3xl font-bold"><%= Course.distinct.count(:user_id) %></p>
-    <p class="text-gray-600">Expert Instructors</p>
-    <div class="mt-2 text-sm text-gray-400">Find the right instructor for you</div>
-  </div>
-
-  <!-- Card 3: Active Learners -->
-  <div class="card bg-base-100 shadow-md p-6 text-center">
-    <h1 class="text-4xl text-primary mb-2">
-      <i class="fa fa-user-graduate"></i>
-    </h1>
-    <p class="text-3xl font-bold"><%= User.count %></p>
-    <p class="text-gray-600">Active Learners</p>
-    <div class="mt-2 text-sm text-gray-400">Join the knowledge sharing community</div>
-  </div>
-
-  <!-- Card 4: Lifetime Access -->
-  <div class="card bg-base-100 shadow-md p-6 text-center">
-    <h1 class="text-4xl text-primary mb-2">
-      <i class="fa fa-infinity"></i>
-    </h1>
-    <p class="text-3xl font-bold">Lifetime Access</p>
-    <p class="text-gray-600">Learn Anytime</p>
-    <div class="mt-2 text-sm text-gray-400">Learn on your schedule</div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <h2 class="text-3xl font-bold text-white">Newest Courses</h2>
-
-<div class="w-full">
-  <% if @latest_courses.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <% @latest_courses.each do |course| %>
-        <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
-          <div class="card-body">
-            <h2 class="card-title text-neutral dark:text-white">
-              <%= link_to course.title, course_path(course), class: "hover:underline" %>
-            </h2>
-            <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
-            <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") %></p>
-
-            <div class="card-actions justify-end mt-4">
-              <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
-              <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
-              <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+              <div class="flex justify-end gap-2 mt-4">
+                <%= link_to "Show", course, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors" %>
+                <%= link_to "Edit", edit_course_path(course), class: "px-3 py-1.5 text-xs font-medium rounded-md bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition-colors" %>
+                <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center my-10 text-gray-600">No courses found.</p>
+    <% end %>
+      </div>
     </div>
-  <% else %>
-    <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
-  <% end %>
-</div>
 
+    <!-- Divider -->
+    <div class="border-t-2 border-gray-100 my-10"></div>
 
+    <!-- Popular Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Popular</h2>
 
+      <div class="w-full">
+      <% if @courses.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% @courses.each do |course| %>
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">
+                <%= link_to course.title, course_path(course), class: "hover:text-blue-600 transition-colors" %>
+              </h2>
+              <p class="text-xs text-gray-500 mt-2">Created by: <%= course.user %></p>
+              <p class="text-xs text-gray-500">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
 
-
-
-
-<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
-
-<h2 class="text-3xl font-bold text-white" >
-Popular
-</h2>
-<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
-
-<div class="w-full">
-<% if @courses.any? %>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <% @courses.each do |course| %>
-      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
-        <div class="card-body">
-        
-        <h2 class="card-title text-neutral dark:text-white">
-<%= link_to course.title, course_path(course), class: "hover:underline" %>
-</h2>
-
-          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
-          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
-
-          <div class="card-actions justify-end mt-4">
-            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
-            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
-            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+              <div class="flex justify-end gap-2 mt-4">
+                <%= link_to "Show", course, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors" %>
+                <%= link_to "Edit", edit_course_path(course), class: "px-3 py-1.5 text-xs font-medium rounded-md bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition-colors" %>
+                <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors" %>
+              </div>
+            </div>
           </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center my-10 text-gray-600">No courses found.</p>
+    <% end %>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t-2 border-gray-100 my-10"></div>
+
+    <!-- Top Rating Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Top Rating</h2>
+
+      <div class="w-full">
+       
+
+
+      <% if @courses.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <% @courses.each do |course| %>
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">
+                <%= link_to course.title, course_path(course), class: "hover:text-blue-600 transition-colors" %>
+              </h2>
+              <p class="text-xs text-gray-500 mt-2">Created by: <%= course.user %></p>
+              <p class="text-xs text-gray-500">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
+
+              <div class="flex justify-end gap-2 mt-4">
+                <%= link_to "Show", course, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors" %>
+                <%= link_to "Edit", edit_course_path(course), class: "px-3 py-1.5 text-xs font-medium rounded-md bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition-colors" %>
+                <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "px-3 py-1.5 text-xs font-medium rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-center my-10 text-gray-600">No courses found.</p>
+    <% end %>
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t-2 border-gray-100 my-10"></div>
+
+    <!-- Newest Section (Duplicate) -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Newest</h2>
+
+      <div class="w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Course Item (Example) -->
+          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+            <div class="p-6">
+              <h2 class="text-xl font-semibold text-gray-900 mb-2">
+                <a href="#" class="hover:text-blue-600 transition-colors">New Course</a>
+              </h2>
+              <p class="text-xs text-gray-500 mt-2">Created by: User Name</p>
+              <p class="text-xs text-gray-500">Created at: Jan 01, 2025</p>
+
+              <div class="flex justify-end gap-2 mt-4">
+                <a href="#" class="px-3 py-1.5 text-xs font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors">Show</a>
+                <a href="#" class="px-3 py-1.5 text-xs font-medium rounded-md bg-yellow-100 text-yellow-800 hover:bg-yellow-200 transition-colors">Edit</a>
+                <button class="px-3 py-1.5 text-xs font-medium rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors">Destroy</button>
+              </div>
+            </div>
+          </div>
+          <!-- Repeat for more courses -->
         </div>
       </div>
-    <% end %>
-  </div>
-<% else %>
-  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
-<% end %>
-</div>
-
-<h2 class="text-3xl font-bold text-white" >
-Top rating
-</h2>
-
-<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
-
-
-<div class="w-full">
-<% if @courses.any? %>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <% @courses.each do |course| %>
-      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
-        <div class="card-body">
-        
-        <h2 class="card-title text-neutral dark:text-white">
-<%= link_to course.title, course_path(course), class: "hover:underline" %>
-</h2>
-
-          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
-          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
-
-          <div class="card-actions justify-end mt-4">
-            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
-            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
-            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
+    </div>
+  </main>
+  
+  <!-- Right Sidebar -->
+  <aside class="lg:col-span-3 sticky top-4 self-start">
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-4">
+      <h3 class="font-bold text-lg mb-4">Stats Overview</h3>
+      
+      <!-- Stats Cards (Vertical Layout) -->
+      <div class="space-y-4">
+        <!-- Card 1: Total Courses -->
+        <div class="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="text-3xl text-blue-600 mb-2">
+            <i class="fa fa-graduation-cap"></i>
           </div>
+          <p class="text-2xl font-bold text-gray-800">125</p>
+          <p class="text-gray-600 font-medium">Online Courses</p>
+          <div class="mt-2 text-xs text-gray-500">Explore a variety of fresh topics</div>
+        </div>
+
+        <!-- Card 2: Instructors -->
+        <div class="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="text-3xl text-blue-600 mb-2">
+            <i class="fa fa-chalkboard-teacher"></i>
+          </div>
+          <p class="text-2xl font-bold text-gray-800">42</p>
+          <p class="text-gray-600 font-medium">Expert Instructors</p>
+          <div class="mt-2 text-xs text-gray-500">Find the right instructor for you</div>
+        </div>
+
+        <!-- Card 3: Active Learners -->
+        <div class="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="text-3xl text-blue-600 mb-2">
+            <i class="fa fa-user-graduate"></i>
+          </div>
+          <p class="text-2xl font-bold text-gray-800">1,250</p>
+          <p class="text-gray-600 font-medium">Active Learners</p>
+          <div class="mt-2 text-xs text-gray-500">Join the knowledge sharing community</div>
+        </div>
+
+        <!-- Card 4: Lifetime Access -->
+        <div class="bg-white rounded-lg shadow-md p-4 text-center hover:shadow-lg transition-shadow border border-gray-100">
+          <div class="text-3xl text-blue-600 mb-2">
+            <i class="fa fa-infinity"></i>
+          </div>
+          <p class="text-2xl font-bold text-gray-800">Lifetime Access</p>
+          <p class="text-gray-600 font-medium">Learn Anytime</p>
+          <div class="mt-2 text-xs text-gray-500">Learn on your schedule</div>
         </div>
       </div>
-    <% end %>
-  </div>
-<% else %>
-  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
-<% end %>
-</div>
-
-
-
-<h2 class="text-3xl font-bold text-white" >
-newest
-</h2>
-
-
-
-<hr class="my-6 border-t-2 border-gray-200 dark:border-gray-700" />
-
-
-
-
-
-
-
-<div class="w-full">
-<% if @courses.any? %>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <% @courses.each do |course| %>
-      <div class="card bg-base-100 shadow-sm border border-base-content/5 dark:border-white/10 dark:bg-neutral text-neutral-content">
-        <div class="card-body">
-        
-        <h2 class="card-title text-neutral dark:text-white">
-<%= link_to course.title, course_path(course), class: "hover:underline" %>
-</h2>
-
-          <p class="text-xs text-gray-400 mt-2">Created by: <%= course.user %></p>
-          <p class="text-xs text-gray-400">Created at: <%= course.created_at.strftime("%b %d, %Y") if course.respond_to?(:created_at) %></p>
-
-          <div class="card-actions justify-end mt-4">
-            <%= link_to "Show", course, class: "btn btn-sm bg-gray-100 hover:bg-gray-200 text-black dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white" %>
-            <%= link_to "Edit", edit_course_path(course), class: "btn btn-sm bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:text-white" %>
-            <%= button_to "Destroy", course, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-sm bg-red-600 hover:bg-red-500 text-white dark:bg-red-700 dark:hover:bg-red-600" %>
-          </div>
+    </div>
+    
+    <!-- Additional sidebar content -->
+    <div class="bg-white rounded-lg shadow-sm p-6">
+      <h3 class="font-bold text-lg mb-4">Trending Topics</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">#1</span>
+          <span class="text-gray-700">Web Development</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">#2</span>
+          <span class="text-gray-700">Data Science</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">#3</span>
+          <span class="text-gray-700">Machine Learning</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">#4</span>
+          <span class="text-gray-700">UI/UX Design</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">#5</span>
+          <span class="text-gray-700">Mobile Development</span>
         </div>
       </div>
-    <% end %>
-  </div>
-<% else %>
-  <p class="text-center my-10 text-gray-600 dark:text-gray-300">No courses found.</p>
-<% end %>
-</div>
-
-
-
-
-
-
-
+    </div>
+  </aside>
 </div>
 </div>
 
 
-</div>
+
+
+
+
+

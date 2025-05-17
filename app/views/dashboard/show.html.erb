@@ -1,0 +1,9 @@
+<div class="w-full pt-14 bg-indigo-900 flex">
+  <!-- Sidebar -->
+  <%= render "sidebar" %>
+
+  <!-- Contenido principal -->
+  <div class="w-full h-[calc(100vh-4rem)] bg-gray-500 relative overflow-auto">
+    <%= turbo_frame_tag :dashboard %>
+  </div>
+</div>

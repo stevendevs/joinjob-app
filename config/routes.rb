@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :courses
+  resources :users, only: [:index]
   get "home/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,4 +15,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+  get "admin", to: "dashboard#show"
+  get "activity", to: "home#activity", as: :home_activity
+
 end
