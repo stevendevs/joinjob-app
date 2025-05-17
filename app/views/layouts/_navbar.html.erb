@@ -8,21 +8,6 @@
       <!-- Link to Courses -->
       <%= link_to "Admin", admin_path, class: "text-white text-lg font-semibold hover:underline transition-colors" %>
 
-      <!-- Search -->
-      <%= form_tag(courses_path, method: :get, class: "flex items-center w-full max-w-xs ml-4") do %>
-        <div class="relative w-full">
-          <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Buscar...",
-              class: "block w-full p-2 pr-10 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" %>
-      
-          <button type="submit"
-            class="absolute right-0 top-0 bottom-0 px-3 text-sm font-medium text-white bg-blue-600 rounded-r-lg hover:bg-blue-700 focus:ring-2 focus:outline-none focus:ring-blue-300 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M21 21l-6-6m0 0A7 7 0 1 0 9 9a7 7 0 0 0 6 6z" />
-            </svg>
-          </button>
-        </div>
-      <% end %>
     </div>
 
 
