@@ -22,4 +22,9 @@ class Course < ApplicationRecord
   def should_generate_new_friendly_id?
     slug.blank?
   end
+
+
+# PublicActivity
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 end

@@ -1,17 +1,9 @@
+<div class="w-full pt-14 bg-indigo-900 flex">
+  <!-- Sidebar -->
+  <%= render "sidebar" %>
 
-
-
-
-<div class="w-full h-screen bg-indigo-900 pt-12  flex ">
-<%= render "sidebar" %>
-
-<div class="w-full flex   h-screen p-0  bg-gray-500  ">
-
-
-
-
-
-
-
-<%= turbo_frame_tag :dashboard %>
+  <!-- Contenido principal -->
+  <div class="w-full h-[calc(100vh-4rem)] bg-gray-500 relative overflow-auto">
+    <%= turbo_frame_tag :dashboard %>
+  </div>
 </div>

@@ -73,3 +73,6 @@ gem "devise", "~> 4.9"
 gem "friendly_id", "~> 5.5"
 
 gem "simple_form", "~> 5.3"
+
+
+gem "public_activity", "~> 3.0"

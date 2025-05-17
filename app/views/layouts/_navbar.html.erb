@@ -1,4 +1,4 @@
-<div class="fixed top-0 z-50 w-full bg-yellow-400 dark:bg-black shadow-md px-4 py-2 mb-0">
+<div class="fixed top-0 z-50 w-full bg-yellow-400 dark:bg-black shadow-md px-4 py-2 ">
   <!-- Left: Logo + Links + Search -->
   <div class="flex items-center justify-between">
     <div class="flex flex-1 items-center space-x-6">
@@ -24,6 +24,16 @@
         </div>
       <% end %>
     </div>
+
+
+
+    <li class="nav-item <%= 'active font-weight-bold' if current_page?(home_activity_path) %>">
+  <%= link_to home_activity_path, class: 'nav-link' do %>
+    <i class="fa fa-bell"></i>
+    Activity
+  <% end %>
+</li>
+
 
     <!-- Right: Cart + Profile -->
     <div class="flex items-center space-x-4">
