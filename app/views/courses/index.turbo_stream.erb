@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "courses" do %>
+    <%= render partial: "courses_list", locals: { courses: @courses } %>
+  <% end %>
+  

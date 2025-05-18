@@ -1,5 +1,30 @@
 <% content_for :title, "Courses" %>
 <%= turbo_frame_tag :dashboard do %>
+
+
+
+  <h1 class="text-2xl font-bold">Courses</h1>
+
+  <div data-controller="search">
+    <%= form_with url: courses_path, method: :get, data: { turbo_frame: "courses" }, local: false do %>
+      <%= text_field_tag :title, params[:title], placeholder: "Search courses...", class: "input input-bordered", data: { action: "input->search#submit" } %>
+    <% end %>
+  </div>
+  
+  <turbo-frame id="courses">
+    <%= render partial: "courses/courses_list", locals: { courses: @courses } %>
+  </turbo-frame>
+ 
+
+
+
+
+
+
+
+
+
+
 <div class="flex flex-col w-full absolute h-screen scroll">
   <div class="flex justify-between items-center mb-4">
     <h1 class="font-bold text-4xl text-center">Courses: <%= @courses.count %></h1>

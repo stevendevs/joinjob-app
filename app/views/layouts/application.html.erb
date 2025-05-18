@@ -23,7 +23,7 @@
   </head>
 
   <body>
-  <%=  render "layouts/navbar" %>
+  <%=  render "shared/navigation" %>
   <%=  render "layouts/messages" %>
   
 
@@ -33,7 +33,14 @@
 
 
     <main class="">
+
       <%= yield %>
+    
+    
+      <%=  render "layouts/footer" %>
+    
     </main>
+
+
   </body>
 </html>

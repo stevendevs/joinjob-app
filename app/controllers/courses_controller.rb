@@ -1,15 +1,25 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
 
-  # GET /courses or /courses.json
   def index
-    if params[:title]
-      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case-insensitive
-    else
-      @courses = Course.all
+    @courses = if params[:title].present?
+                 Course.where("title ILIKE ?", "%#{params[:title]}%")
+               else
+                 Course.all
+               end
+  
+    respond_to do |format|
+      format.html # carga inicial
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "courses", 
+          partial: "courses/courses_list", 
+          locals: { courses: @courses }
+        )
+      end
     end
   end
-
+  
   # GET /courses/1 or /courses/1.json
   def show
   end

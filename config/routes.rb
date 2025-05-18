@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :courses
-  resources :users, only: [:index]
-  get "home/index"
+  resources :users, only: [:index, :edit, :show, :update]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,8 +15,12 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "home#index"
-  get "admin", to: "dashboard#show"
+  root "pages#home"
+  get "admin", to: "pages#admin"
+  
   get "activity", to: "home#activity", as: :home_activity
+  get 'home/newest', to: 'home#newest', as: :home_newest
+
+ 
 
 end

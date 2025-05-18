@@ -1,20 +1,36 @@
-<div class="fixed top-0 z-50 w-full bg-yellow-400 dark:bg-black shadow-md px-4 py-2 ">
-  <!-- Left: Logo + Links + Search -->
-  <div class="flex items-center justify-between">
-    <div class="flex flex-1 items-center space-x-6">
-      <!-- Logo -->
-      <%= link_to "JoinJob", root_path , data: { turbo_frame: "main" },  class: "text-white text-3xl font-extrabold transition-colors hover:text-white/90" %>
+<div class="fixed top-0 z-50 w-full bg-yellow-400 dark:bg-black shadow-md px-4 py-2">
+  <div class="flex flex-col sm:flex-row items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-6 w-full">
 
-      <!-- Link to Courses -->
-      <%= link_to "Admin", admin_path,  data: { turbo_frame: "main" } , class: "text-white text-lg font-semibold hover:underline transition-colors", data: { turbo_frame: :dashboard} %>
+      <!-- Dropdown móvil (sm) -->
+      <% items = [
+        ["Home", root_path],
+        ["Admin", admin_path]
+      ] %>
 
+      <div class="sm:hidden w-full flex justify-center">
+        <%= select_tag nil,
+            options_for_select(items, request.path),
+            class: "w-full max-w-sm rounded px-4 py-2 bg-white text-black font-semibold shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300",
+            onchange: "Turbo.visit(this.value)" %>
+      </div>
+
+      <!-- Enlaces desktop -->
+      <ul class="hidden sm:flex items-center space-x-6">
+        <li>
+          <%= link_to "JOINJOB", root_path ,class: "text-white text-3xl font-extrabold transition-colors hover:text-white/90" %>
+        </li>
+        <li class="hidden md:block md:mx-auto">
+        <%= link_to "Admin", admin_path,  class: "text-white text-lg font-semibold hover:underline transition-colors", data: {turbo_frame: :dashboard} %>
+
+        </li>
+
+        
+      </ul>
     </div>
 
-
-
-
     <!-- Right: Cart + Profile -->
-    <div class="flex items-center space-x-4">
+    <div class="mt-2 sm:mt-0 flex items-center space-x-4">
       <!-- Cart -->
       <div class="relative group">
         <button class="p-2 rounded-full text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/20">
@@ -53,7 +69,7 @@
             </div>
             <div class="py-1">
               <%= link_to 'Account settings', edit_user_registration_path, class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors" %>
-              <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors" %>
+              <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete },  class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-red-600 transition-colors" %>
             </div>
           <% else %>
             <div class="py-1">
