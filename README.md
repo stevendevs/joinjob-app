@@ -350,3 +350,25 @@
 
 
 night
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%= render "newest_courses" %>
+
+<div class="border-t-2 border-gray-100 my-10"></div>
+
+<%= render "popular_courses" %>
+
+<div class="border-t-2 border-gray-100 my-10"></div>
+
+<%= render "top_rating_courses" %>

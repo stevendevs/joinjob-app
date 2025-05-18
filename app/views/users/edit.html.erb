@@ -1,0 +1,28 @@
+
+<%= turbo_frame_tag :dashboard do %>
+<div class="card pt-16">
+  <div class="card-header">
+    Editing roles for <%= @user.email %>
+  </div>
+
+  <div class="card-body">
+    <%= simple_form_for @user do |f| %>
+      <%= f.collection_check_boxes :role_ids, Role.all, :id, :name do |b| %>
+        <div class="form-check">
+          <%= b.check_box(class: 'form-check-input') %>
+          <%= b.label(class: 'form-check-label') %>
+        </div>
+      <% end %>
+
+      <%= f.error :roles, class: 'text-danger' %>
+
+      <hr>
+      <%= f.button :submit, class: "btn btn-success" %>
+    <% end %>
+  </div>
+
+  <div class="card-footer">
+    <%= link_to 'Cancel', users_path, class: 'btn btn-danger' %>
+  </div>
+</div>
+<% end %>

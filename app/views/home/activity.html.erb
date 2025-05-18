@@ -1,28 +1,33 @@
-<h1 class="pt-16">Activity</h1>
+<%= turbo_frame_tag :dashboard do %>
+  <h1 class="pt-16 text-center text-2xl font-bold">Actividad</h1>
 
+  <div class="text-center mb-6">
+    <h3 class="text-lg">
+      Total de actividades
+      <span class="badge badge-info"><%= @activities.count %></span>
+    </h3>
+  </div>
 
-<h3 class="text-center">
-  Activity
-  <span class="badge badge-info">
-    <!-- Aquí va el conteo de actividades -->
-    <!-- Por ejemplo, si usas ERB: -->
-    <%= @activities.count %>
-  </span>
-</h3>
-
-<p></p>
-
-<ul class="list-group">
-  <% @activities.each do |activity| %>
-    <li class="list-group-item">
-      <span><%= activity.id %></span>
-      <span><%= activity.trackable_type %></span>
-      <span><%= activity.trackable_id %></span>
-      <span><%= link_to activity.trackable, activity.trackable %></span>
-      <span><%= activity.key %></span>
-      <span><%= activity.parameters %></span>
-      <span><%= activity.owner %></span>
-    </li>
+  <% @activities.each_with_index do |activity, index| %>
+    <div class="collapse collapse-arrow bg-base-100 border border-base-300 mb-2">
+      <input type="radio" name="activity-accordion" <%= 'checked' if index == 0 %> />
+      <div class="collapse-title font-semibold">
+        Actividad <%= activity.id %> - <%= activity.key %>
+      </div>
+      <div class="collapse-content text-sm space-y-1">
+        <p><strong>ID:</strong> <%= activity.id %></p>
+        <p><strong>Tipo:</strong> <%= activity.trackable_type %></p>
+        <p><strong>ID del objeto:</strong> <%= activity.trackable_id %></p>
+        <p><strong>Objeto:</strong>
+          <% if activity.trackable.present? %>
+            <%= link_to activity.trackable.to_s, activity.trackable rescue activity.trackable_type %>
+          <% else %>
+            <em>No disponible</em>
+          <% end %>
+        </p>
+        <p><strong>Parámetros:</strong> <%= activity.parameters.to_json %></p>
+        <p><strong>Responsable:</strong> <%= activity.owner %></p>
+      </div>
+    </div>
   <% end %>
-</ul>
-
+<% end %>

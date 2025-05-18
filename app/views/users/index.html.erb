@@ -27,7 +27,9 @@
           <th scope="col" class="px-6 py-3">Last Activity</th>
           <th scope="col" class="px-6 py-3">IP Address</th>
           <th scope="col" class="px-6 py-3">Status</th>
+        
           <th scope="col" class="px-6 py-3">Actions</th>
+            <th scope="col" class="px-6 py-3">Roles</th>
         </tr>
       </thead>
       
@@ -101,8 +103,10 @@
                   Unconfirmed
                 </span>
               <% end %>
+
             </td>
-            
+         
+        
             <!-- Actions -->
             <td class="px-6 py-4">
               <div class="flex space-x-2">
@@ -114,6 +118,14 @@
                 </button>
               </div>
             </td>
+            <td class="px-6 py-4">
+  <% user.roles.each do |role| %>
+    <span class="inline-flex items-center px-2 py-1 mr-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
+      <%= role.name %>
+    </span>
+    <%= link_to "Edit role", edit_user_path(user), data: {turbo_frame: :dashboard } %>
+  <% end %>
+</td>
           </tr>
         <% end %>
         
