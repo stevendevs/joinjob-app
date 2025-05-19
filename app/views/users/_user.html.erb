@@ -1,34 +1,62 @@
+<p>
+  <%= time_ago_in_words(user.created_at) %> ago
+</p>
 <div class="card-footer">
-  <span>
-    <!-- tiempo desde creación en palabras -->
-    <%= time_ago_in_words(user.created_at) %> ago
-  </span>
+  <%= 'sign_in_count'.humanize %>
+  <b><%= 'sign_in_count'.humanize + ":" %></b>
+  <%= user.sign_in_count %>
 </div>
-
+<div class="row">
+  <%= 'current_sign_in_at'.humanize %>
+  <b><%= 'current_sign_in_at'.humanize + ":" %></b>
+  <%= user.current_sign_in_at %>
+</div>
+<div class="row">
+  <%= 'last_sign_in_at'.humanize %>
+  <b><%= 'last_sign_in_at'.humanize + ":" %></b>
+  <%= user.last_sign_in_at %>
+</div>
+<div class="row">
+  <%= 'current_sign_in_ip'.humanize %>
+  <b><%= 'current_sign_in_ip'.humanize + ":" %></b>
+  <%= user.current_sign_in_ip %>
+</div>
+<div class="row">
+  <%= 'last_sign_in_ip'.humanize %>
+  <b><%= 'last_sign_in_ip'.humanize + ":" %></b>
+  <%= user.last_sign_in_ip %>
+</div>
 <div class="card-footer">
-  <b><%= 'sign_in_count'.humanize %>:</b> <%= user.sign_in_count %>
+  Confirmed email? <%= user.confirmed? ? 'Yes' : 'No' %>
 </div>
 
-<div class="row">
-  <b><%= 'current_sign_in_at'.humanize %>:</b> <%= user.current_sign_in_at %>
-</div>
 
-<div class="row">
-  <b><%= 'last_sign_in_at'.humanize %>:</b> <%= user.last_sign_in_at %>
-</div>
+<div class="card bg-white shadow-md rounded-md p-4 mb-4 hidden ">
+  <div class="card-body">
+    <p><strong>Created:</strong> <%= time_ago_in_words(user.created_at) %> ago</p>
 
-<div class="row">
-  <b><%= 'current_sign_in_ip'.humanize %>:</b> <%= user.current_sign_in_ip %>
-</div>
+    <div class="card-footer">
+      <p><strong>Sign in count:</strong> <%= user.sign_in_count %></p>
 
-<div class="row">
-  <b><%= 'last_sign_in_ip'.humanize %>:</b> <%= user.last_sign_in_ip %>
-</div>
+      <div class="row">
+        <p><strong>Current sign in at:</strong> <%= user.current_sign_in_at %></p>
+      </div>
 
-<div class="card-footer">
-  Confirmed email?
+      <div class="row">
+        <p><strong>Last sign in at:</strong> <%= user.last_sign_in_at %></p>
+      </div>
 
+      <div class="row">
+        <p><strong>Current sign in IP:</strong> <%= user.current_sign_in_ip %></p>
+      </div>
 
+      <div class="row">
+        <p><strong>Last sign in IP:</strong> <%= user.last_sign_in_ip %></p>
+      </div>
+    </div>
 
-  
+    <div class="card-footer">
+      <p><strong>Confirmed email?</strong> <%= user.confirmed_at.present? ? 'Yes' : 'No' %></p>
+    </div>
+  </div>
 </div>

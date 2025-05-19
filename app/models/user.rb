@@ -18,6 +18,8 @@ class User < ApplicationRecord
   # Asignar roles automáticamente después de crear el usuario
   after_create :assign_default_role
 
+  validate :must_have_a_role, on: :update 
+
   private
 
   def assign_default_role
@@ -32,5 +34,11 @@ class User < ApplicationRecord
       self.add_role(:student) unless self.has_role?(:student)
     end
   end
-end
 
+  def must_have_a_role
+    unless roles.any?
+      errors.add(:roles, "Must have at least one role")
+    end
+  end
+
+end

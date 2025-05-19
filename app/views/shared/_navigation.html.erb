@@ -1,24 +1,23 @@
 
 <div class="navbar p-0  fixed z-50 bg-yellow-500 ">
   
+<div class="h-16 w-full flex items-center">
+  <% items = [
+    ["JOINJOB", root_path],
+    ["courses", courses_path],
+    ["Users", users_path],
+    (["Editar perfil", edit_user_path(current_user)] if current_user),
+    ["Activity", home_activity_path]
+  ].compact %>
 
-<div class=" h-16 w-full flex  items-center ">  
-<% items = [
-  ["JOINJOB", root_path],
-  ["courses", courses_path],
-  ["Editar perfil", edit_user_path(current_user)],
-  ["Activity", home_activity_path],
-] %>
-
-<div class="w-full flex  h-14">
-  <%= select_tag :navigation,
-      options_for_select(items, request.path),
-      class: " max-w-sm ml-4 h-14 rounded-full px-4 py-2 text-2xl text-white font-extrabold bg-yellow-500 border-2 border-yellow-500 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-300",
-      onchange: "Turbo.visit(this.value)",
-      data: { turbo_frame: :main }
-      %>
-</div>
-
+  <div class="w-full flex h-14">
+    <%= select_tag :navigation,
+        options_for_select(items, request.path),
+        class: "max-w-sm ml-4 h-14 rounded-full px-4 py-2 text-2xl text-white font-extrabold bg-yellow-500 border-2 border-yellow-500 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-300",
+        onchange: "Turbo.visit(this.value)",
+        data: { turbo_frame: :main }
+    %>
+  </div>
 </div>
 
 <div class=" h-16 w-full  ">  
