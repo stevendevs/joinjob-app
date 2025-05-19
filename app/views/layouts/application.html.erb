@@ -31,12 +31,11 @@
 
 
 
-
-    <main class="">
-      <%= yield %>
+  <%= turbo_frame_tag :main do %>
+    <%= yield %>
+  <% end %>
       <%=  render "layouts/footer" %>
     
-    </main>
 
 
   </body>
