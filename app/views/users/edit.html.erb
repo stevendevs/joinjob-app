@@ -1,0 +1,30 @@
+<%= turbo_frame_tag :dashboard do %>
+
+<div class="bg-white rounded-xl shadow p-6 max-w-xl mx-auto">
+  <div class="text-xl font-semibold mb-4">
+    Editing roles for <%= @user.email %>
+  </div>
+
+  <%= simple_form_for @user do |f| %>
+    <div class="space-y-4">
+      <%= f.collection_check_boxes :role_ids, Role.all, :id, :name do |b| %>
+        <div class="flex items-center space-x-2">
+          <%= b.check_box(class: "rounded border-gray-300 text-indigo-600 focus:ring-indigo-500") %>
+          <%= b.label(class: "text-gray-700") %>
+        </div>
+      <% end %>
+
+      <%= f.error :roles, class: 'text-red-500 text-sm' %>
+    </div>
+
+    <hr class="my-4 border-t">
+
+    <%= f.button :submit, class: "bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
+  <% end %>
+  
+  <div class="mt-4">
+  <%= link_to 'Cancel', users_path, class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+  </div>
+  </div>
+  
+  <% end %>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
   get "admin", to: "dashboard#show"
+  resources :users, only: [:index, :edit, :show, :update]
   get "activity", to: "home#activity", as: :home_activity
 
 end
