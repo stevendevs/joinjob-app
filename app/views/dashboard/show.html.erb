@@ -1,14 +1,13 @@
-
 <%= turbo_frame_tag :main do %>
+  <div class="w-full pt-16 bg-indigo-900 flex">
+    <!-- Sidebar -->
+    <%= render "sidebar" %>
 
-
-<div class="w-full pt-16 bg-indigo-900 flex">
-  <!-- Sidebar -->
-  <%= render "sidebar" %>
-
-  <!-- Contenido principal -->
-  <div class="w-full h-[calc(100vh-4rem)] bg-gray-500 relative overflow-auto">
-    <%= turbo_frame_tag :dashboard %>
+    <!-- Contenido principal -->
+    <div class="w-full h-[calc(100vh-4rem)] bg-gray-500 relative overflow-auto ">
+      <%= turbo_frame_tag :dashboard do %>
+        <!-- Aquí puedes poner contenido por defecto o dejarlo vacío -->
+      <% end %>
+    </div>
   </div>
-</div>
 <% end %>
