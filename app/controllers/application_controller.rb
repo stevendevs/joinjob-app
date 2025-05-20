@@ -2,9 +2,11 @@ class ApplicationController < ActionController::Base
   # Autenticación del usuario antes de cualquier acción
   before_action :authenticate_user!
 
-  # Incluir funcionalidades de Pundit para autorización
-  include Pundit::Authorization
 
+  include Pundit::Authorization
+  include Pundit
+  protect_from_forgery
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # Incluir funcionalidad de PublicActivity para registrar acciones del usuario actual
   include PublicActivity::StoreController
 
@@ -18,5 +20,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+
+  def user_not_authorized #pundit
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
  
 end

@@ -3,13 +3,16 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    if params[:title]
-      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") #case-insensitive
-    else
-      @courses = Course.all
+    base_query = Course.all
+  
+    if params[:title].present?
+      base_query = base_query.where('title ILIKE ?', "%#{params[:title]}%")
     end
+  
+    @q = base_query.ransack(params[:q])
+    @courses = @q.result(distinct: true)
   end
-
+  
   # GET /courses/1 or /courses/1.json
   def show
   end
