@@ -7,7 +7,13 @@
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
 
-        <%= link_to "Go to courses", courses_path , class:"btn btn-primary" %>
+
+      <div class="text-center">
+      <%= link_to courses_path, class: 'rounded-md px-6 py-3 bg-green-600 hover:bg-green-500 text-white inline-flex items-center font-medium' do %>
+        <i class="fa fa-book mr-2"></i>
+        View All Courses
+      <% end %>
+    </div>
     </div>
   </div>
 </div>
@@ -104,11 +110,3 @@
   <% end %>
 </div>
 
-<hr class="my-8">
-
-<div class="text-center">
-  <%= link_to courses_path, class: 'rounded-md px-6 py-3 bg-green-600 hover:bg-green-500 text-white inline-flex items-center font-medium' do %>
-    <i class="fa fa-book mr-2"></i>
-    View All Courses
-  <% end %>
-</div>

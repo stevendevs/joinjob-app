@@ -1,4 +1,13 @@
-     <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-
-       
+<% if flash[:alert].present? || flash[:notice].present? %>
+  <div class="toast fixed top-16 right-4 z-50">
+    <% if flash[:alert].present? %>
+      <div class="alert alert-error shadow-lg">
+        <span><%= flash[:alert] %></span>
+      </div>
+    <% elsif flash[:notice].present? %>
+      <div class="alert alert-success shadow-lg">
+        <span><%= flash[:notice] %></span>
+      </div>
+    <% end %>
+  </div>
+<% end %>
