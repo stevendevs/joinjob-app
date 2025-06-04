@@ -69,3 +69,5 @@ gem "hotwire-livereload", "~> 2.0", :group => :development
 gem "simple_form", "~> 5.3"
 
 gem "faker", "~> 3.5"
+
+gem "devise", "~> 4.9"

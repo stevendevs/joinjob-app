@@ -7,6 +7,23 @@
     <%= link_to "JOINJOB", root_path, class:"font-bold text-xl " %>
     </div>
 
+
+
+
+
+    <% if current_user %>
+    <div class="flex items-center space-x-4 bg-sky-400">
+      <span class="text-gray-700 font-medium"><%= current_user.email %></span>
+      <%= link_to 'Account settings', edit_user_registration_path, class: "text-blue-600 hover:underline" %>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "text-red-600 hover:underline" %>
+    </div>
+  <% else %>
+    <div class="flex items-center space-x-4">
+      <%= link_to 'Sign Up', new_user_registration_path, class: "text-green-600 hover:underline" %>
+      <%= link_to 'Log In', new_user_session_path, class: "text-blue-600 hover:underline" %>
+    </div>
+  <% end %>
+  
     <!-- Botón móvil -->
     <div class="md:hidden">
       <button data-action="click->mobile-menu#toggleMenu" class="p-2 bg-white/10 rounded-xl text-white">
