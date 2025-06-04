@@ -1,16 +1,14 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
 
-
-# GET /courses or /courses.json
-def index
-  if params[:title].present?
-    @courses = Course.where('title ILIKE ?', "%#{params[:title]}%") # búsqueda sin distinguir mayúsculas/minúsculas
-  else
-    @courses = Course.all
+  # GET /courses or /courses.json
+  def index
+    if params[:title].present?
+      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
+    else
+      @courses = Course.all
+    end
   end
-end
-
 
   # GET /courses/1 or /courses/1.json
   def show
@@ -18,7 +16,8 @@ end
 
   # GET /courses/new
   def new
-    @course = current_user.courses.new
+    @course = Course.new
+
   end
 
   # GET /courses/1/edit
@@ -27,7 +26,8 @@ end
 
   # POST /courses or /courses.json
   def create
-    @course = current_user.courses.new(course_params)
+    @course = Course.new(course_params)
+    @course.user = current_user
 
     respond_to do |format|
       if @course.save
@@ -55,10 +55,10 @@ end
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
-    @course.destroy!
+    @course.destroy
 
     respond_to do |format|
-      format.html { redirect_to courses_path, status: :see_other, notice: "Course was successfully destroyed." }
+      format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,11 +66,11 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = current_user.courses.find(params.expect(:id))
+      @course = Course.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.expect(course: [ :title, :description, :username ])
+      params.require(:course).permit(:title, :description)
     end
 end

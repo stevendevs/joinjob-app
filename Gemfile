@@ -73,3 +73,5 @@ gem "faker", "~> 3.5"
 gem "devise", "~> 4.9"
 
 gem "tailwind_devise", "~> 0.0.3"
+
+gem "friendly_id", "~> 5.5"
