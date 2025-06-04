@@ -11,3 +11,104 @@
     </div>
   </div>
 </div>
+
+
+
+
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8 mb-8">
+  <h1 class="text-4xl font-bold mb-4">
+    What do you want to learn today?
+  </h1>
+</div>
+
+<div class="flex items-center space-x-4 mb-8">
+  <i class="fa fa-flag text-blue-600"></i>
+  <i class="fab fa-amazon text-orange-500"></i>
+  <%= link_to root_path, class: "text-blue-600 hover:text-blue-800" do %>
+    <i class="fa fa-home"></i>
+  <% end %>
+</div>
+
+<div class="mb-8">
+  <%= form_tag(courses_path, method: :get, class: "flex") do %>
+    <div class="flex">
+      <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500' %>
+      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-r-md">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+    </div>
+  <% end %>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <div class="bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl font-bold text-blue-600 mb-2">
+      <i class="fa fa-graduation-cap"></i>
+    </h2>
+    <div class="text-2xl font-bold text-gray-800"><%= Course.count %></div>
+    <div class="text-gray-600 font-medium">online courses</div>
+    <div class="text-sm text-gray-500 mt-2">Explore a variety of fresh topics</div>
+  </div>
+  
+  <div class="bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl font-bold text-green-600 mb-2">
+      <i class="fa fa-chalkboard-teacher"></i>
+    </h2>
+    <div class="text-2xl font-bold text-gray-800"><%= Course.distinct.count(:user_id) %></div>
+    <div class="text-gray-600 font-medium">expert instructors</div>
+    <div class="text-sm text-gray-500 mt-2">Find the right instructor for you</div>
+  </div>
+  
+  <div class="bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl font-bold text-purple-600 mb-2">
+      <i class="fa fa-user-graduate"></i>
+    </h2>
+    <div class="text-2xl font-bold text-gray-800"><%= User.count %></div>
+    <div class="text-gray-600 font-medium">active learners</div>
+    <div class="text-sm text-gray-500 mt-2">Join the knowledge sharing community</div>
+  </div>
+  
+  <div class="bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl font-bold text-red-600 mb-2">
+      <i class="fa fa-infinity"></i>
+    </h2>
+    <div class="text-2xl font-bold text-gray-800">Lifetime access</div>
+    <div class="text-sm text-gray-500 mt-2">Learn on your schedule</div>
+  </div>
+</div>
+
+<hr class="my-8">
+
+<h2 class="text-2xl font-bold mb-6">Popular courses</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <% @courses.each do |course| %>
+    <%= render 'courses/course', course: course %>
+  <% end %>
+</div>
+
+<hr class="my-8">
+
+<h2 class="text-2xl font-bold mb-6">Top rated courses</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <% @courses.each do |course| %>
+    <%= render 'courses/course', course: course %>
+  <% end %>
+</div>
+
+<hr class="my-8">
+
+<h2 class="text-2xl font-bold mb-6">Latest courses</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+  <% @latest_courses.each do |course| %>
+    <%= render 'courses/course', course: course %>
+  <% end %>
+</div>
+
+<hr class="my-8">
+
+<div class="text-center">
+  <%= link_to courses_path, class: 'rounded-md px-6 py-3 bg-green-600 hover:bg-green-500 text-white inline-flex items-center font-medium' do %>
+    <i class="fa fa-book mr-2"></i>
+    View All Courses
+  <% end %>
+</div>

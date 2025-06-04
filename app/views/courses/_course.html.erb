@@ -1,10 +1,26 @@
-<div id="<%= dom_id course %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= link_to course.title, course_path(course) %>
+<div class="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
+  <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+    <i class="fa fa-book text-blue-600 mr-2"></i>
+    <%= link_to course.title, course_path(course), class: "text-blue-600 hover:text-blue-800 font-semibold" %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Description:</strong>
+  <div class="px-4 py-4">
     <%= course.description %>
+  </div>
+  <div class="bg-gray-50 px-4 py-3 border-t border-gray-200">
+    <div class="flex items-center text-sm text-gray-600 mb-2">
+      <i class="far fa-clock mr-2"></i>
+      <%= course.created_at.strftime('%d-%b-%Y') %>
+    </div>
+    <div class="flex items-center text-sm text-gray-600">
+      <i class="fa fa-chalkboard-teacher mr-2"></i>
+      <%= course.user %>
+    </div>
+  </div>
+  <div class="bg-gray-50 px-4 py-3 border-t border-gray-200">
+  <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
+  <%= link_to "Show", course, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Edit", edit_course_path(course), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= button_to "Destroy", course, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+</div>
   </div>
 </div>
