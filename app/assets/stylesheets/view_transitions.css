@@ -1,0 +1,96 @@
+/* ===== ANIMACIONES BÁSICAS ===== */
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes slide-from-right {
+  from { transform: translateX(60px); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(130px); }
+}
+
+@keyframes slide-to-left {
+  to { transform: translateX(-30px); }
+}
+
+/* ===== TRANSICIONES GLOBALES SIMPLES ===== */
+/* Descomenta estas líneas para una transición simple */
+/*
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+*/
+
+/* ===== TRANSICIONES GLOBALES AVANZADAS ===== */
+/* Transición con slide y fade */
+::view-transition-old(root) {
+  animation: 
+    90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(root) {
+  animation: 
+    210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+/* ===== TRANSICIONES ESPECÍFICAS POR ELEMENTO ===== */
+
+/* Navbar */
+.navbar {
+  view-transition-name: navbar;
+}
+
+::view-transition-old(navbar),
+::view-transition-new(navbar) {
+  animation-duration: 0.2s;
+}
+
+/* Contenido principal */
+main {
+  view-transition-name: main-content;
+}
+
+/* Sidebar (si tienes uno) */
+.sidebar {
+  view-transition-name: sidebar;
+}
+
+html[data-turbo-visit-direction="forward"]::view-transition-new(sidebar) {
+  animation: 
+    90ms cubic-bezier(0.4, 0, 1, 1) both fade-in,
+    210ms cubic-bezier(0.4, 0, 0.2, 1) both slide-up;
+}
+
+/* ===== TRANSICIONES PARA FORMULARIOS ===== */
+.form-container {
+  view-transition-name: form-container;
+}
+
+html[data-turbo-visit-direction="forward"]::view-transition-new(form-container) {
+  animation: 
+    150ms cubic-bezier(0, 0, 0.2, 1) both fade-in,
+    250ms cubic-bezier(0.4, 0, 0.2, 1) both slide-up;
+}
+
+/* ===== TRANSICIONES PARA LISTAS/CARDS ===== */
+.course-card {
+  view-transition-name: course-card;
+}
+
+.course-list {
+  view-transition-name: course-list;
+}
+
+::view-transition-old(course-list),
+::view-transition-new(course-list) {
+  animation-duration: 0.4s;
+}
