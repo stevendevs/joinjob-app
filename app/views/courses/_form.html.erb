@@ -1,9 +1,8 @@
 <%= form_with(model: course, class: "contents") do |form| %>
   <% if course.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
-      <ul class="list-disc ml-6">
+    <div class="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded mb-4">
+      <h3><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h3>
+      <ul>
         <% course.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,17 +10,19 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :title %>
-    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": course.errors[:title].none?, "border-red-400 focus:outline-red-600": course.errors[:title].any?}] %>
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.text_field :title, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.rich_textarea :description, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": course.errors[:description].none?, "border-red-400 focus:outline-red-600": course.errors[:description].any?}] %>
+  <div class="mb-4">
+    <%= form.label :description, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.rich_text_area :description, rows: 4, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
   </div>
 
-  <div class="inline">
-    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+  <%= button_tag type: "submit",
+      class: "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-4 py-2 rounded",
+      data: { turbo_submits_with: "Guardando..." } do %>
+    Crear Curso
+  <% end %>
 <% end %>
