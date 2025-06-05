@@ -3,6 +3,14 @@
 <% end %>
 
 
+
+
+
+
+
+
+
+
 <div class="min-h-screen bg-gray-50 ">
 
 
@@ -15,19 +23,14 @@
 
 
 <!-- Left Sidebar -->
-<!-- Left Sidebar -->
-<aside class="hidden lg:block lg:col-span-3 sticky top-24 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
-  <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 backdrop-blur-sm p-6">
- 
 
-    <!-- Trending Topics -->
-    <div>
-      <h3 class="font-bold text-lg mb-4 text-gray-900 flex items-center">
-        <svg class="w-5 h-5 mr-2 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
-        </svg>
-        Trending Topics
-      </h3>
+<aside class="hidden lg:block lg:col-span-3 sticky top-4 self-start h-screen border-r border-gray-200">
+  <div class="p-4">
+    <h3 class="font-bold text-lg mb-4 text-gray-800">Stats Overview</h3>
+    
+    <!-- Stats Cards (Vertical Layout) -->
+    <div class="space-y-4">
+      <!-- Card 1: Total Courses -->
       <div class="space-y-3">
         <div class="group bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-105">
           <p class="text-xs text-blue-600 font-medium">Trending in Technology</p>
@@ -48,38 +51,54 @@
         </div>
       </div>
     </div>
+    
+    <!-- Trending Topics -->
+    <div class="mt-8">
+      <h3 class="font-bold text-lg mb-4 text-gray-800">Trending Topics</h3>
+      <div class="space-y-3">
+        <div class="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+          <p class="text-xs text-gray-500">Trending in Technology</p>
+          <p class="font-medium">#WebDevelopment</p>
+          <p class="text-xs text-gray-500">5.2K courses</p>
+        </div>
+        <div class="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+          <p class="text-xs text-gray-500">Trending in Science</p>
+          <p class="font-medium">#DataScience</p>
+          <p class="text-xs text-gray-500">3.8K courses</p>
+        </div>
+        <div class="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+          <p class="text-xs text-gray-500">Trending in Design</p>
+          <p class="font-medium">#UXDesign</p>
+          <p class="text-xs text-gray-500">2.4K courses</p>
+        </div>
+      </div>
+    </div>
   </div>
 </aside>
     
     <!-- Main Content (Middle Column) -->
     <!-- Main Content (Middle Column) -->
     <main class="lg:col-span-6 space-y-8">
-      
-      <!-- Hero Section -->
-      <!-- Simple Course Carousel -->
-      <div class="carousel w-full h-96 rounded-3xl shadow-2xl overflow-hidden">
-      <% @latest_courses.each_with_index do |course, index| %>
-        <% 
-          current_slide = index + 1
-          prev_slide = index == 0 ? @latest_courses.length : index
-          next_slide = index + 1 == @latest_courses.length ? 1 : index + 2
-        %>
-        
-        <div id="slide<%= current_slide %>" class="carousel-item relative w-full">
-          <div class="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center p-8">
-            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-              <%= render 'courses/course', course: course %>
-            </div>
-          </div>
-          
-          <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide<%= prev_slide %>" class="btn btn-circle">❮</a>
-            <a href="#slide<%= next_slide %>" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-      <% end %>
+
+    <div class="hero bg-base-200">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Hello there</h1>
+        <p class="py-6">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+          quasi. In deleniti eaque aut repudiandae et a id nisi.
+        </p>
+  
+  
+        <div class="text-center">
+        <%= link_to courses_path, class: 'rounded-md px-6 py-3 bg-green-600 hover:bg-green-500 text-white inline-flex items-center font-medium' do %>
+          <i class="fa fa-book mr-2"></i>
+          View All Courses
+        <% end %>
+      </div>
+      </div>
     </div>
-      
+  </div>
 
       <!-- Newest Courses Section -->
       <div class="space-y-6">
@@ -478,37 +497,9 @@
 
 
 
-<div class="mb-8">
-  <%= form_tag(courses_path, method: :get, class: "flex") do %>
-    <div class="flex">
-      <%= text_field_tag :title, params[:title], autocomplete: 'off', placeholder: "Search", class: 'px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500' %>
-      <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-r-md">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-    </div>
-  <% end %>
-</div>
 
 
-<div class="hero bg-base-200 min-h-screen">
-  <div class="hero-content text-center">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold">Hello there</h1>
-      <p class="py-6">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
-      </p>
 
-
-      <div class="text-center">
-      <%= link_to courses_path, class: 'rounded-md px-6 py-3 bg-green-600 hover:bg-green-500 text-white inline-flex items-center font-medium' do %>
-        <i class="fa fa-book mr-2"></i>
-        View All Courses
-      <% end %>
-    </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -576,3 +567,28 @@
   <% end %>
 </div>
 
+      
+<!-- Hero Section -->
+<!-- Simple Course Carousel -->
+<div class="carousel w-full h-96 rounded-3xl shadow-2xl overflow-hidden">
+<% @latest_courses.each_with_index do |course, index| %>
+  <% 
+    current_slide = index + 1
+    prev_slide = index == 0 ? @latest_courses.length : index
+    next_slide = index + 1 == @latest_courses.length ? 1 : index + 2
+  %>
+  
+  <div id="slide<%= current_slide %>" class="carousel-item relative w-full">
+    <div class="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center p-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+        <%= render 'courses/course', course: course %>
+      </div>
+    </div>
+    
+    <div class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+      <a href="#slide<%= prev_slide %>" class="btn btn-circle">❮</a>
+      <a href="#slide<%= next_slide %>" class="btn btn-circle">❯</a>
+    </div>
+  </div>
+<% end %>
+</div>
