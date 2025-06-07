@@ -1,0 +1,42 @@
+<!-- app/views/layouts/_alerts.html.erb -->
+<%= turbo_frame_tag "flash" do %>
+  <% if flash[:alert].present? || flash[:notice].present? %>
+    <div class="fixed top-16 right-4 z-50 space-y-2">
+      <% if flash[:alert].present? %>
+        <div data-controller="flash" 
+             data-flash-target="toast" 
+             data-action="click->flash#clickToDismiss"
+             class="alert alert-error shadow-lg opacity-0 translate-x-full transition-all duration-300 ease-in-out transform cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span><%= flash[:alert] %></span>
+            <button type="button" 
+                    data-action="click->flash#dismiss" 
+                    class="btn btn-sm btn-ghost btn-square">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      <% end %>
+
+      <% if flash[:notice].present? %>
+        <div data-controller="flash" 
+             data-flash-target="toast" 
+             data-action="click->flash#clickToDismiss"
+             class="alert alert-success shadow-lg opacity-0 translate-x-full transition-all duration-300 ease-in-out transform cursor-pointer">
+          <div class="flex items-center justify-between gap-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span><%= flash[:notice] %></span>
+      
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

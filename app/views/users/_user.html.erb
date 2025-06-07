@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <p><strong>Email:</strong> <%= user.email %></p>
+  </div>
+
+  <div>
+    <p>Signed up <%= time_ago_in_words(user.created_at) %> ago</p>
+  </div>
+
+  <div>
+    <p><strong><%= 'sign_in_count'.humanize %>:</strong> <%= user.sign_in_count %></p>
+    <p><strong><%= 'current_sign_in_at'.humanize %>:</strong> <%= user.current_sign_in_at %></p>
+    <p><strong><%= 'last_sign_in_at'.humanize %>:</strong> <%= user.last_sign_in_at %></p>
+    <p><strong><%= 'current_sign_in_ip'.humanize %>:</strong> <%= user.current_sign_in_ip %></p>
+    <p><strong><%= 'last_sign_in_ip'.humanize %>:</strong> <%= user.last_sign_in_ip %></p>
+  </div>
+  <p>Confirmed email?</p>
+<% if user.confirmed_at.present? %>
+  <p>Yes</p>
+<% else %>
+  <p>No</p>
+<% end %>
+
+</div>

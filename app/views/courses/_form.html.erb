@@ -1,0 +1,71 @@
+<%= form_with(model: course, class: "contents") do |form| %>
+  <% if course.errors.any? %>
+    <div class="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 p-4 rounded mb-4">
+      <h3><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h3>
+      <ul>
+        <% course.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :title, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.text_field :title, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :description, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.rich_text_area :description, rows: 4, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
+  </div>
+
+
+
+  <div class="mb-4">
+    <%= form.label :short_description, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.text_area :short_description, rows: 4, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
+  </div>
+
+
+  <div class="my-5">
+  <%= form.label :location, "Ubicación" %>
+  <%= form.text_field :location, 
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
+              {"border-gray-400 focus:outline-blue-600": course.errors[:location].none?, 
+               "border-red-400 focus:outline-red-600": course.errors[:location].any?}],
+      placeholder: "Ej: San José, Costa Rica" %>
+</div>
+<div class="my-5">
+<%= form.label :images %>
+<%= form.file_field :images, multiple: true, direct_upload: true, class: "block w-full mt-2" %>
+</div>
+
+
+<div class="mb-4">
+  <%= form.label :price, class: "font-semibold" %>
+  <%= form.number_field :price, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+<div class="mb-4">
+  <%= form.label :language, class: "font-semibold" %>
+  <%= form.select :language, ["English", "Polish", "Russian"], { prompt: "Select language" }, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+<div class="mb-4">
+  <%= form.label :level, class: "font-semibold" %>
+  <%= form.select :level, ["Beginner", "Intermediate", "Advanced"], { prompt: "Select level" }, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+
+
+
+
+
+
+  <%= button_tag type: "submit",
+      class: "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-4 py-2 rounded",
+      data: { turbo_submits_with: "Guardando..." } do %>
+    Crear Curso
+  <% end %>
+<% end %>
