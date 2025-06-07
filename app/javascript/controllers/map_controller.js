@@ -20,7 +20,7 @@ export default class extends Controller {
 
     console.log("Final map coordinates:", xMap, yMap);
 
-    this.map = L.map('map').setView([xMap, yMap], 10); // Cambié zoom a 10 para ver mejor
+    this.map = L.map('map').setView([xMap, yMap], 7); // Cambié zoom a 10 para ver mejor
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

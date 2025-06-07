@@ -1,16 +1,4 @@
-<!-- app/views/explore/show.html.erb -->
 
-<!-- Debug Info (remover en producción) -->
-<div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace;">
-  <strong>Debug Info:</strong><br>
-  Map X: <%= @map_x %><br>
-  Map Y: <%= @map_y %><br>
-  Center Lat: <%= @center_lat %><br>
-  Center Lng: <%= @center_lng %><br>
-  Courses Count: <%= @courses.count %><br>
-  Course Data: <%= @listing_data.to_json if defined?(@listing_data) %><br>
-  Courses Data: <%= @courses_data.to_json if defined?(@courses_data) %>
-</div>
 
 <div class="w-full flex flex-col h-screen">
   <h1 class="font-bold text-4xl mb-4">Explore listings nearby</h1>
@@ -63,4 +51,19 @@
       </div>
     </div>
   <% end %>
+</div>
+
+
+<!-- app/views/explore/show.html.erb -->
+
+<!-- Debug Info (remover en producción) -->
+<div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace;">
+  <strong>Debug Info:</strong><br>
+  Map X: <%= @map_x %><br>
+  Map Y: <%= @map_y %><br>
+  Center Lat: <%= @center_lat %><br>
+  Center Lng: <%= @center_lng %><br>
+  Courses Count: <%= @courses.count %><br>
+  Course Data: <%= @listing_data.to_json if defined?(@listing_data) %><br>
+  Courses Data: <%= @courses_data.to_json if defined?(@courses_data) %>
 </div>
