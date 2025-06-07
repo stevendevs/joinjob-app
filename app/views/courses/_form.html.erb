@@ -21,6 +21,13 @@
   </div>
 
 
+
+  <div class="mb-4">
+    <%= form.label :short_description, class: "block text-gray-700 dark:text-gray-300 mb-2" %>
+    <%= form.text_area :short_description, rows: 4, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
+  </div>
+
+
   <div class="my-5">
   <%= form.label :location, "Ubicación" %>
   <%= form.text_field :location, 
