@@ -7,7 +7,8 @@ class Course < ApplicationRecord
   
   validates :title, presence: true
   validates :description, presence: true, length: { minimum: 5 }
-  
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
   # 🔧 AGREGAR ESTA CONFIGURACIÓN DE GEOCODIFICACIÓN
   geocoded_by :location, latitude: :latitude, longitude: :longitude
   after_validation :geocode, if: :will_save_change_to_location?
