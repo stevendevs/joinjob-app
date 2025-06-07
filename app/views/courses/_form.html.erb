@@ -20,6 +20,17 @@
     <%= form.rich_text_area :description, rows: 4, class: "w-full p-3 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white" %>
   </div>
 
+
+  <div class="my-5">
+  <%= form.label :location, "Ubicación" %>
+  <%= form.text_field :location, 
+      class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
+              {"border-gray-400 focus:outline-blue-600": course.errors[:location].none?, 
+               "border-red-400 focus:outline-red-600": course.errors[:location].any?}],
+      placeholder: "Ej: San José, Costa Rica" %>
+</div>
+
+
   <%= button_tag type: "submit",
       class: "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-4 py-2 rounded",
       data: { turbo_submits_with: "Guardando..." } do %>

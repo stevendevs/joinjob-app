@@ -1,5 +1,6 @@
 class Course < ApplicationRecord
   belongs_to :user
+  has_many_attached :images
   has_many :lessons, dependent: :destroy
   
   has_rich_text :description
@@ -9,6 +10,10 @@ class Course < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
   
+
+
+    # Configuración de Geocoder
+
   def to_s
     title
   end

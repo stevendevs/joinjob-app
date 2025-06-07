@@ -34,6 +34,17 @@
       </div>
     </div>
 
+
+
+    <% if course.location.present? %>
+    <div>
+      <strong class="block font-medium mb-1">Ubicación:</strong>
+      <%= course.location %>
+    </div>
+  <% end %>
+
+
+
     <!-- Botones - altura fija -->
 <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 border-t border-gray-200 dark:border-gray-600">
   <div class="flex justify-end gap-4">

@@ -1,0 +1,53 @@
+<div class="w-full flex flex-col h-screen">
+  <div class="p-4">
+    <h1 class="font-bold text-4xl mb-4">Explorar cursos cercanos</h1>
+    
+    <%= form_with url: explore_path, class: "w-full mb-4", method: :get, local: true do |form| %>
+      <div class="flex w-full gap-2 items-end">
+        <div class="flex flex-col max-w-sm w-full"> 
+          <%= form.label :location, "Ubicación", class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= form.text_field :location, 
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
+              placeholder: "Ingresa una ciudad o dirección",
+              value: params[:location] %>
+        </div>
+        <%= form.submit "Buscar", 
+            class: "cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 focus:outline-none" %>
+      </div>
+    <% end %>
+    
+    <% if @courses.any? %>
+      <p class="text-sm text-gray-600 mb-2">
+        Mostrando <%= @courses.count %> curso(s) 
+        <% if params[:location].present? %>
+          cerca de "<%= params[:location] %>"
+        <% end %>
+        de un total de <%= @all_courses.count %> cursos disponibles.
+      </p>
+      <% if params[:location].present? %>
+        <p class="text-xs text-blue-600 mb-4">
+          📍 Todos los cursos están visibles en el mapa. El área de búsqueda se muestra en rojo.
+        </p>
+      <% end %>
+    <% else %>
+      <p class="text-sm text-red-600 mb-4">
+        No se encontraron cursos en esta ubicación, pero puedes ver todos los cursos disponibles en el mapa.
+      </p>
+    <% end %>
+  </div>
+  
+  <div id="map" 
+       class="w-full flex-1 bg-gray-200" 
+       data-controller="map" 
+       data-map-center-lat-value="<%= @center_lat %>" 
+       data-map-center-lng-value="<%= @center_lng %>" 
+       data-map-courses-value="<%= @courses_data.html_safe %>"
+       <% if params[:location].present? %>
+         data-map-search-location-value="<%= params[:location] %>"
+       <% end %>>
+    <!-- Mensaje de carga mientras se inicializa el mapa -->
+    <div class="flex items-center justify-center h-full">
+      <p class="text-gray-500">Cargando mapa...</p>
+    </div>
+  </div>
+</div>
