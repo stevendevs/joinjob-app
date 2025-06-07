@@ -18,6 +18,14 @@ export default class extends Controller {
     }, 4000)
   }
 
+  // Método para cerrar al hacer clic en cualquier parte del alert
+  clickToDismiss(event) {
+    // Solo cerrar si no se hizo clic en un botón o enlace
+    if (!event.target.closest('button') && !event.target.closest('a')) {
+      this.dismiss()
+    }
+  }
+
   dismiss() {
     // Animar la salida del toast
     this.toastTarget.classList.remove("translate-x-0", "opacity-100")

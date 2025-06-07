@@ -26,17 +26,14 @@
     <meta name="view-transition" content="same-origin" />
   </head>
 
-  <body>
-
-<%= render "layouts/navbar" %>
-<%= render "layouts/alerts" %>
+  <body data-controller="infinite-scroll" data-infinite-scroll-threshold-value="0.85">
+    <%= render "layouts/navbar" %>
+    <%= render "layouts/alerts" %>
    
-    <main data-mobile-menu-target="content"  >
-     
-    <%= yield %>
-
+    <main data-mobile-menu-target="content" data-infinite-scroll-target="content">
+      <%= yield %>
     </main>
+    
     <%= render "layouts/footer" %>
-   
   </body>
 </html>
