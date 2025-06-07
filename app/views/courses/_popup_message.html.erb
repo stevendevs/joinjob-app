@@ -1,78 +1,23 @@
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static values = { 
-    x: Number,        // Latitud del centro
-    y: Number,        // Longitud del centro  
-    data: String      // Datos de los cursos
-  }
-
-  connect() {
-    // Coordenadas por defecto (San José, Costa Rica)
-    const defaultLat = 9.9281;
-    const defaultLng = -84.0907;
-    
-    // Usar las coordenadas del controlador o las por defecto
-    const centerLat = this.xValue || defaultLat;
-    const centerLng = this.yValue || defaultLng;
-    
-    // Inicializar el mapa
-    this.map = L.map('map').setView([centerLat, centerLng], 13);
-
-    // Agregar capa de tiles de OpenStreetMap
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(this.map);
-
-    // Agregar marcadores de cursos si hay datos
-    if (this.dataValue) {
-      try {
-        const coursesData = JSON.parse(this.dataValue);
-        this.addCourseMarkers(coursesData);
-      } catch (error) {
-        console.error('Error parsing course data:', error);
-      }
-    }
-  }
-
-  addCourseMarkers(courses) {
-    if (!courses || courses.length === 0) {
-      console.log('No courses data available for markers');
-      return;
-    }
-
-    courses.forEach(course => {
-      if (course.x && course.y) {
-        // Crear marcador
-        const marker = L.marker([course.x, course.y])
-          .addTo(this.map);
-        
-        // Agregar popup con el HTML del partial
-        if (course.popupMessage) {
-          marker.bindPopup(course.popupMessage, {
-            maxWidth: 300,
-            className: 'custom-popup'
-          });
-        }
-      }
-    });
-
-    // Ajustar el zoom para mostrar todos los marcadores
-    if (courses.length > 0) {
-      const validCourses = courses.filter(course => course.x && course.y);
-      if (validCourses.length > 0) {
-        const group = new L.featureGroup(
-          validCourses.map(course => L.marker([course.x, course.y]))
-        );
-        this.map.fitBounds(group.getBounds().pad(0.1));
-      }
-    }
-  }
-
-  disconnect() {
-    if (this.map) {
-      this.map.remove();
-    }
-  }
-}
+<div class="w-80 flex flex-col p-2">
+  <h3 class="font-bold text-lg mb-2"><%= course.title %></h3>
+  
+  <% if course.images.any? %>
+    <%= image_tag(course.images.first, class: "h-40 w-full object-cover mb-2 rounded") %>
+  <% end %>
+  
+  <p class="text-sm text-gray-600 mb-2">
+    <%= truncate(course.description.to_plain_text, length: 100) if course.description %>
+  </p>
+  
+  <p class="text-xs text-gray-500 mb-1">
+    <strong>Ubicación:</strong> <%= course.location %>
+  </p>
+  
+  <p class="text-xs text-gray-500 mb-3">
+    <strong>Creador:</strong> <%= course.user&.email || 'Usuario desconocido' %>
+  </p>
+  
+  <%= link_to "Ver curso", course_path(course), 
+      class: "mr-auto focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2",
+      target: "_blank" %>
+</div>

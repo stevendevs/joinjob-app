@@ -1,25 +1,30 @@
+# app/models/course.rb
 class Course < ApplicationRecord
   belongs_to :user
+  
   has_many_attached :images
-  has_many :lessons, dependent: :destroy
-  
   has_rich_text :description
+  
   validates :title, presence: true
-  validates :description, presence: true, length: {minimum: 5}
+  validates :description, presence: true, length: { minimum: 5 }
   
-  extend FriendlyId
-  friendly_id :title, use: :slugged
+  # 🔧 AGREGAR ESTA CONFIGURACIÓN DE GEOCODIFICACIÓN
+  geocoded_by :location, latitude: :latitude, longitude: :longitude
+  after_validation :geocode, if: :will_save_change_to_location?
   
-
-
-    # Configuración de Geocoder
-
   def to_s
     title
   end
   
-  # Método para regenerar slug si es necesario
-  def should_generate_new_friendly_id?
-    slug.blank? || title_changed?
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+  
+  # Métodos helper para verificar geocodificación
+  def geocoded?
+    latitude.present? && longitude.present?
+  end
+  
+  def coordinates
+    [latitude, longitude] if geocoded?
   end
 end

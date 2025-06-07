@@ -29,6 +29,10 @@
                "border-red-400 focus:outline-red-600": course.errors[:location].any?}],
       placeholder: "Ej: San José, Costa Rica" %>
 </div>
+<div class="my-5">
+<%= form.label :images %>
+<%= form.file_field :images, multiple: true, direct_upload: true, class: "block w-full mt-2" %>
+</div>
 
 
   <%= button_tag type: "submit",
