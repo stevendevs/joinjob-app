@@ -35,6 +35,27 @@
 </div>
 
 
+<div class="mb-4">
+  <%= form.label :price, class: "font-semibold" %>
+  <%= form.number_field :price, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+<div class="mb-4">
+  <%= form.label :language, class: "font-semibold" %>
+  <%= form.select :language, ["English", "Polish", "Russian"], { prompt: "Select language" }, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+<div class="mb-4">
+  <%= form.label :level, class: "font-semibold" %>
+  <%= form.select :level, ["Beginner", "Intermediate", "Advanced"], { prompt: "Select level" }, class: "w-full border rounded-md px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+</div>
+
+
+
+
+
+
+
   <%= button_tag type: "submit",
       class: "bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-4 py-2 rounded",
       data: { turbo_submits_with: "Guardando..." } do %>

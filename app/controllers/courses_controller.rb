@@ -70,7 +70,18 @@ sleep 2
     end
 
     # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:title, :description, :location, images: [], :short_description, :price, :languaje, :level )
-    end
+# Only allow a list of trusted parameters through.
+def course_params
+  params.require(:course).permit(
+    :title,
+    :description,
+    :location,
+    :short_description,
+    :price,
+    :language, # corregido aquí
+    :level,
+    images: []
+  )
+end
+
 end
