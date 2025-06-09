@@ -55,6 +55,23 @@
     </div>
 
 
+
+    <h5>Courses</h5>
+
+<%= form_tag root_path, method: :get do %>
+<% end %>
+
+<%= form_tag courses_path, method: :get do %>
+  <div>
+    <%= text_field_tag :name, params[:name], placeholder: "Search by name", autocomplete: "off" %>
+    <%= text_field_tag :title, params[:title], placeholder: "Search by title", autocomplete: "off" %>
+    <button type="submit">
+      <span class="fa fa-search" aria-hidden="true"></span>
+    </button>
+  </div>
+<% end %>
+
+
    
 <%= link_to "MAPA", explore_path, class: "nav-link" %>
  

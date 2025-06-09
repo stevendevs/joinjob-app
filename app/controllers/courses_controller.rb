@@ -6,7 +6,10 @@ class CoursesController < ApplicationController
     if params[:title].present?
       @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
     else
-      @courses = Course.all
+     # @courses = Course.all
+
+     @q = Course.ransack(params[:q])
+     @courses = @q.result.includes(:user)
     end
   end
 

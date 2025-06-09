@@ -28,4 +28,46 @@ class Course < ApplicationRecord
   def coordinates
     [latitude, longitude] if geocoded?
   end
+
+
+
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      id
+      title
+      short_description
+      description
+      language
+      level
+      price
+      user_id
+      created_at
+      updated_at
+    ]
+  end
+ 
+  def self.ransackable_associations(auth_object = nil)
+    %w[user]
+  end
+
+
+  LANGUAGES = [:"English", :"Russian", :"Polish", :"Spanish"]
+  def self.languages
+    LANGUAGES.map { |language| [language, language] }
+  end
+
+  LEVELS = [:"Beginner", :"Intermediate", :"Advanced"]
+  def self.levels
+    LEVELS.map { |level| [level, level] }
+  end
+
+
+
+
+
+
+
+
+  
 end
