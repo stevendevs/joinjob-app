@@ -2,310 +2,162 @@
 
 
 
+/* ===== TRANSICIONES PURAS - PRIORIDAD EN SUAVIDAD ===== */
 
-/* ===== TRANSICIONES MICRO-SUTILES CON IMPACTO VISUAL ===== */
-
-/* Configuración global ultra-suave */
+/* Configuración base - máxima fluidez */
 ::view-transition-old(root), 
 ::view-transition-new(root) {
   animation-duration: 0.4s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   animation-fill-mode: both;
 }
 
-/* Entrada con brillo sutil */
+/* Entrada - transición pura sin movimiento brusco */
 ::view-transition-new(root) {
-  animation-name: microGlow;
+  animation-name: pureEnter;
 }
 
-/* Salida delicada */
+/* Salida - desvanecimiento natural */
 ::view-transition-old(root) {
-  animation-name: microFade;
+  animation-name: pureExit;
 }
 
-/* Micro-movimiento con brillo */
-@keyframes microGlow {
+@keyframes pureEnter {
   0% {
     opacity: 0;
-    transform: translateY(2px);
-    filter: brightness(0.95);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(1px);
-    filter: brightness(1.05);
+    transform: translateY(3px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: brightness(1);
   }
 }
 
-/* Micro-desvanecimiento */
-@keyframes microFade {
+@keyframes pureExit {
   0% {
     opacity: 1;
-    transform: translateY(0);
-    filter: brightness(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translateY(-1px);
-    filter: brightness(1.02);
   }
   100% {
     opacity: 0;
-    transform: translateY(-2px);
-    filter: brightness(0.98);
   }
 }
 
-/* ===== CONTENIDO PRINCIPAL - EFECTO CRISTAL ===== */
-
-::view-transition-old(main),
+/* ===== CONTENIDO - RESPIRACIÓN SUTIL ===== */
 ::view-transition-new(main) {
-  animation-duration: 0.35s;
-  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: breathe 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-::view-transition-new(main) {
-  animation-name: crystalRise;
-}
-
-::view-transition-old(main) {
-  animation-name: crystalSink;
-}
-
-@keyframes crystalRise {
+@keyframes breathe {
   0% {
     opacity: 0;
-    transform: scale(0.99) translateY(1px);
-    filter: blur(0.5px) brightness(0.98);
-  }
-  60% {
-    opacity: 0.9;
-    transform: scale(0.998) translateY(0.5px);
-    filter: blur(0.2px) brightness(1.02);
+    transform: scale(0.995);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0) brightness(1);
+    transform: scale(1);
   }
 }
 
-@keyframes crystalSink {
-  0% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: blur(0) brightness(1);
-  }
-  40% {
-    opacity: 0.7;
-    transform: scale(1.002) translateY(-0.5px);
-    filter: blur(0.1px) brightness(1.01);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.005) translateY(-1px);
-    filter: blur(0.3px) brightness(0.99);
-  }
-}
-
-/* ===== NAVEGACIÓN - ONDAS SUTILES ===== */
-
-::view-transition-old(nav),
+/* ===== NAVEGACIÓN - APARICIÓN GRADUAL ===== */
 ::view-transition-new(nav) {
-  animation-duration: 0.3s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  animation: emerge 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-::view-transition-new(nav) {
-  animation-name: rippleIn;
-}
-
-@keyframes rippleIn {
+@keyframes emerge {
   0% {
     opacity: 0;
-    transform: translateX(-1px);
-    filter: contrast(0.98);
-  }
-  70% {
-    opacity: 0.9;
-    transform: translateX(0.5px);
-    filter: contrast(1.02);
+    transform: translateX(-6px);
   }
   100% {
     opacity: 1;
     transform: translateX(0);
-    filter: contrast(1);
   }
 }
 
-/* ===== HEADERS - PULSO LUMINOSO ===== */
+/* ===== RESPONSIVE - ADAPTACIÓN INTELIGENTE ===== */
 
-::view-transition-old(header),
-::view-transition-new(header) {
-  animation-duration: 0.45s;
-  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-::view-transition-new(header) {
-  animation-name: lumaPulse;
-}
-
-@keyframes lumaPulse {
-  0% {
-    opacity: 0;
-    transform: translateY(-1px);
-    filter: saturate(0.95) brightness(0.97);
+/* Tablets */
+@media (max-width: 1024px) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.35s;
   }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-0.5px);
-    filter: saturate(1.05) brightness(1.03);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: saturate(1) brightness(1);
+  
+  @keyframes pureEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-/* ===== SIDEBAR - VAPOR SUTIL ===== */
-
-::view-transition-old(sidebar),
-::view-transition-new(sidebar) {
-  animation-duration: 0.5s;
-  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-::view-transition-new(sidebar) {
-  animation-name: vaporWave;
-}
-
-@keyframes vaporWave {
-  0% {
-    opacity: 0;
-    transform: translateX(-2px) scale(0.995);
-    filter: hue-rotate(-2deg) brightness(0.96);
-  }
-  60% {
-    opacity: 0.85;
-    transform: translateX(-0.5px) scale(0.999);
-    filter: hue-rotate(1deg) brightness(1.04);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    filter: hue-rotate(0deg) brightness(1);
-  }
-}
-
-/* ===== MÓVILES - MICRO TRANSICIONES ===== */
+/* Móviles */
 @media (max-width: 768px) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.25s;
-    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
   }
   
+  @keyframes pureEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(1px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  ::view-transition-new(nav) {
+    animation-duration: 0.2s;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-name: mobileMicro;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
   }
   
-  @keyframes mobileMicro {
-    0% {
-      opacity: 0;
-      transform: translateY(1px);
-      filter: brightness(0.98);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: brightness(1);
-    }
+  @keyframes pureEnter {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 }
 
-/* ===== HOVER STATES - EFECTO SHIMMER ===== */
-@media (hover: hover) {
-  ::view-transition-new(root):hover {
-    animation-name: shimmerFlow;
-  }
-  
-  @keyframes shimmerFlow {
-    0% {
-      opacity: 0;
-      transform: translateY(2px);
-      filter: brightness(0.95) contrast(0.98);
-    }
-    30% {
-      opacity: 0.7;
-      transform: translateY(1px);
-      filter: brightness(1.08) contrast(1.05);
-    }
-    70% {
-      opacity: 0.95;
-      transform: translateY(0.5px);
-      filter: brightness(1.03) contrast(1.02);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: brightness(1) contrast(1);
-    }
-  }
-}
-
-/* ===== CONFIGURACIÓN DE ACCESIBILIDAD ===== */
+/* ===== ACCESIBILIDAD - RESPETO TOTAL ===== */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.15s;
-    animation-timing-function: ease;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
   }
   
-  ::view-transition-new(root),
-  ::view-transition-old(root) {
-    animation-name: accessibleFade;
+  ::view-transition-new(root) {
+    animation-name: accessible;
   }
   
-  @keyframes accessibleFade {
-    0% { opacity: 0; filter: brightness(0.99); }
-    100% { opacity: 1; filter: brightness(1); }
+  @keyframes accessible {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 }
 
-/* ===== CONFIGURACIÓN PARA PANTALLAS RETINA ===== */
-@media (-webkit-min-device-pixel-ratio: 2) {
+/* ===== OPTIMIZACIÓN PARA ALTA DENSIDAD ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.3s;
   }
-  
-  @keyframes microGlow {
-    0% {
-      opacity: 0;
-      transform: translateY(1.5px);
-      filter: brightness(0.97);
-    }
-    50% {
-      opacity: 0.85;
-      transform: translateY(0.5px);
-      filter: brightness(1.03);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-      filter: brightness(1);
-    }
-  }
 }
-
-
-
 
 
 
@@ -323,3 +175,34 @@
 @plugin "./daisyui-theme.js"{
   /* custom theme here */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@theme {
+  --color-joinjob-yellow: #FFD700; 
+  --color-body:  #F1F3F4; 
+
+
+ 
+  --color-joinjob-dark-yellow: #D6E2F1; 
+  --color-joinjob-ocean: #aad3df; 
+  --color-joinjob-ocean: #aad3df; 
+  --color-green-online: #00FF00; 
+
+  --radius-complete:8px; 
+}
+
+
