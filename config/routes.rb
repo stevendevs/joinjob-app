@@ -10,14 +10,16 @@ Rails.application.routes.draw do
   resources :courses do 
     resources :lessons
   end
-  resources :users, only: [:index]
+
+  resources :users, only: [:index, :edit, :show, :update]
+  
   resources :lessons # <- agregando esto también habilita /lessons
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   # Agrega esta línea
   get "explore", to: "explore#show", as: :explore
-
+  get "activity", to: "home#activity", as: :home_activity
   # Defines the root path route ("/")
    root "home#index"
 end

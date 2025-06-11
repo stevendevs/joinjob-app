@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   has_many :courses
 
   # Include default devise modules. Others available are:
@@ -28,9 +29,22 @@ class User < ApplicationRecord
           %w[courses]
         end
       
+        rolify
+        after_create :assign_default_role
 
-
-
+        def assign_default_role
+          if User.count == 1
+            # Primer usuario => admin, teacher y student
+            self.add_role(:admin)
+            self.add_role(:teacher)
+            self.add_role(:student)
+          else
+            # Usuarios posteriores => teacher y student por defecto
+            self.add_role(:teacher) unless self.has_role?(:teacher)
+            self.add_role(:student) unless self.has_role?(:student)
+          end
+        end
+      
 
 
 

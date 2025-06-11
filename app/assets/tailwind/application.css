@@ -193,6 +193,7 @@
 
 @theme {
   --color-joinjob-yellow: #FFD700; 
+  --color-joinjob-brown: #D97706; 
   --color-body:  #F1F3F4; 
   --color-secundario: #F1F3F4; 
 
@@ -202,7 +203,10 @@
   --color-joinjob-ocean: #aad3df; 
   --color-green-online: #00FF00; 
 
-  --radius-complete:8px; 
+  --radius-min:1rem; 
+  --radius-complete:2rem; 
+  --radius-max:50rem; 
+
 }
 
 

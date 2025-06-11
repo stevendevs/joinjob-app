@@ -11,4 +11,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :avatar])
   end
+
+  include PublicActivity::StoreController #save current_user using gem public_activity
 end

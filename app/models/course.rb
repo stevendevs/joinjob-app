@@ -63,6 +63,9 @@ class Course < ApplicationRecord
   end
 
 
+# PublicActivity
+include PublicActivity::Model
+tracked owner: Proc.new{ |controller, model| controller.current_user }
 
 
 
