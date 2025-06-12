@@ -2,16 +2,17 @@ class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
 
   # GET /courses or /courses.json
-  def index
-    if params[:title].present?
-      @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
-    else
-     # @courses = Course.all
+ # GET /courses or /courses.json
+ def index
 
-     @q = Course.ransack(params[:q])
-     @courses = @q.result.includes(:user)
-    end
+  if params[:title].present?
+    @courses = Course.where('title ILIKE ?', "%#{params[:title]}%")
+  else
+    @q = Course.ransack(params[:q])
+    @courses = @q.result.includes(:user)
   end
+end
+
 
   # GET /courses/1 or /courses/1.json
   def show
@@ -25,6 +26,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    authorize @course
   end
 
   # POST /courses or /courses.json
