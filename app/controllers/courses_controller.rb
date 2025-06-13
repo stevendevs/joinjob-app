@@ -21,7 +21,7 @@ end
   # GET /courses/new
   def new
     @course = Course.new
-
+    authorize @course
   end
 
   # GET /courses/1/edit
@@ -32,6 +32,7 @@ end
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
+    authorize @course
     @course.user = current_user
 sleep 2
     respond_to do |format|
@@ -47,6 +48,7 @@ sleep 2
 
   # PATCH/PUT /courses/1 or /courses/1.json
   def update
+    authorize @course
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: "Course was successfully updated." }
@@ -60,6 +62,7 @@ sleep 2
 
   # DELETE /courses/1 or /courses/1.json
   def destroy
+    authorize @course
     @course.destroy
 
     respond_to do |format|
