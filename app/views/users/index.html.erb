@@ -8,7 +8,8 @@
         <div class="flex justify-between items-start mb-4">
           <div>
             <p class="text-sm text-gray-600">ID: <span class="font-mono"><%= user.id %></span></p>
-            <p class="text-lg font-medium text-gray-900"><%= user.email %></p>
+            <%= link_to user.email, user_path(user), class: "text-lg font-medium text-gray-900 hover:underline" %>
+
           </div>
           
        <% if policy(user).edit? %>

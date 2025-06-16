@@ -24,6 +24,12 @@ class User < ApplicationRecord
             updated_at
           ]
         end
+
+
+
+        extend FriendlyId
+        friendly_id :email, use: :slugged
+  
       
         def self.ransackable_associations(auth_object = nil)
           %w[courses]
