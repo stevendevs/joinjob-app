@@ -38,7 +38,7 @@ class LessonsTest < ApplicationSystemTestCase
 
   test "should destroy Lesson" do
     visit lesson_url(@lesson)
-    accept_confirm { click_on "Destroy this lesson", match: :first }
+    accept_confirm { accept_confirm { click_on "Destroy this lesson", match: :first } }
 
     assert_text "Lesson was successfully destroyed"
   end

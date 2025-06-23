@@ -1,7 +1,8 @@
 # app/models/course.rb
 class Course < ApplicationRecord
   belongs_to :user
-  
+  has_many :lessons, dependent: :destroy
+
   has_many_attached :images
   has_rich_text :description
   
