@@ -22,11 +22,11 @@ export default class extends Controller {
   setInitialState() {
     if (window.innerWidth >= 768) {
       this.menuTarget.classList.remove("hidden")
-      this.contentTarget.classList.add("pt-16")
+      this.contentTarget.classList.add("pt-14")
       this.contentTarget.classList.remove("pt-24")
     } else {
       this.menuTarget.classList.add("hidden")
-      this.contentTarget.classList.add("pt-16")
+      this.contentTarget.classList.add("pt-14")
       this.contentTarget.classList.remove("pt-24")
     }
   }
@@ -34,11 +34,11 @@ export default class extends Controller {
   updatePadding() {
     if (window.innerWidth < 768) {
       if (this.menuTarget.classList.contains("hidden")) {
-        this.contentTarget.classList.add("pt-16")
+        this.contentTarget.classList.add("pt-14")
         this.contentTarget.classList.remove("pt-24")
       } else {
         this.contentTarget.classList.add("pt-24")
-        this.contentTarget.classList.remove("pt-16")
+        this.contentTarget.classList.remove("pt-14")
       }
     }
   }

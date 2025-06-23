@@ -1,0 +1,22 @@
+<!-- app/views/courses/_popup_message.html.erb -->
+<div class="p-4 max-w-sm">
+  <h3 class="font-semibold text-gray-900 mb-2">
+    <%= link_to course.title, course, class: "text-blue-600 hover:text-blue-800" %>
+  </h3>
+   <%= image_tag(course.images.first, class: "h-40 object-cover") if course.images.any? %>
+  <p class="text-sm text-gray-600 mb-2">
+    <svg class="inline w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+    </svg>
+    <%= course.location %>
+  </p>
+  
+  <p class="text-sm text-gray-700 leading-relaxed mb-3">
+    <%= truncate(strip_tags(course.description), length: 100) %>
+  </p>
+  
+  <div class="flex gap-2">
+    <%= link_to "Ver detalles", course, 
+        class: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors" %>
+  </div>
+</div>

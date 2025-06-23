@@ -1,0 +1,54 @@
+<nav class="fixed top-0 w-full bg-joinjob-yellow shadow-md z-50" data-controller="mobile-menu">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-14">
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <%= link_to "JOINJOB", root_path, class:"font-bold text-xl " %>
+      </div>
+
+      <h5>Courses</h5>
+
+      <% if current_user && current_user.has_role?(:admin) %>
+        <%= form_tag courses_path, method: :get do %>
+          <div>
+            <%= text_field_tag :name, params[:name], placeholder: "Search by name", autocomplete: "off" %>
+            <%= text_field_tag :title, params[:title], placeholder: "Search by title", autocomplete: "off" %>
+            <button type="submit">
+              <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= link_to "MAPA", explore_path, class: "nav-link" %>
+
+      <% if user_signed_in? %>
+        <%= link_to 'Sign out',
+            destroy_user_session_path,
+            data: { turbo_method: :delete },
+            class: "text-white bg-red-600 hover:bg-red-700 rounded-max font-medium text-sm px-4 sm:px-5 py-2 sm:py-2.5 text-center transition-colors shadow-md hover:shadow-lg" %>
+      <% else %>
+        <%= link_to 'Sign in',
+            new_user_session_path,
+            class: "text-yellow-600 bg-white hover:bg-gray-100 rounded-full font-medium text-sm px-4 sm:px-5 py-2 sm:py-2.5 text-center transition-colors shadow-md hover:shadow-lg" %>
+      <% end %>
+
+      <!-- Botón móvil -->
+      <div class="md:hidden">
+        <button data-action="click->mobile-menu#toggleMenu" class="p-2 bg-white/10 rounded-xl text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div data-mobile-menu-target="menu" class="md:hidden hidden bg-gradient-to-r from-amber-400/95 via-yellow-500/95 to-amber-500/95 border-t border-white/10">
+      <div class="px-4 py-4">
+        <!-- Contenido móvil opcional -->
+      </div>
+    </div>
+  </div>
+</nav>

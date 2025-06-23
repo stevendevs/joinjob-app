@@ -1,0 +1,45 @@
+<div class="w-full min-h-screen bg-gray-50 flex">
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Panel derecho - Mapa -->
+  <div class="flex-1 relative">
+    <div class="absolute inset-0 bg-gray-100">
+      <div id="map"
+           class="w-full h-full"
+           data-controller="map"
+           data-map-x-value="<%= @map_x %>"
+           data-map-y-value="<%= @map_y %>"
+           data-map-center-lat-value="<%= @center_lat %>"
+           data-map-center-lng-value="<%= @center_lng %>"
+           data-map-data-value="<%= (@listing_data || @courses_data).to_json %>"
+           data-map-courses-value="<%= @courses_data.to_json if defined?(@courses_data) %>">
+      </div>
+    </div>
+    
+  
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

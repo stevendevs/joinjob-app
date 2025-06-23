@@ -1,0 +1,57 @@
+<div class="w-full h-screen bg-red-400 flex">
+  <div class="w-full h-screen bg-lime-400">
+    <h1 class="pt-16">Activity</h1>
+  </div>
+  
+  <div class="w-full h-screen bg-lime-500 p-6">
+    <h3 class="text-center mb-6">
+      Activity
+      <span class="badge badge-info">
+        <%= @activities.count %>
+      </span>
+    </h3>
+
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Action</th>
+            <th>Target</th>
+            <th>User</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @activities.each do |activity| %>
+          <tr>
+            <th><%= activity.id %></th>
+            <td>
+              <span class="badge badge-outline">
+                <%= activity.key.humanize %>
+              </span>
+            </td>
+            <td>
+              <div>
+                <strong><%= activity.trackable_type %></strong>
+                <br>
+                <small class="text-gray-500">ID: <%= activity.trackable_id %></small>
+                <% if activity.trackable %>
+                  <br>
+                  <%= link_to "View", activity.trackable, class: "link link-primary text-sm" %>
+                <% end %>
+              </div>
+            </td>
+            <td>
+              <%= activity.owner&.email || 'System' %>
+            </td>
+            <td>
+              <small><%= time_ago_in_words(activity.created_at) %> ago</small>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

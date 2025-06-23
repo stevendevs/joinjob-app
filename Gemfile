@@ -40,7 +40,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -65,3 +65,23 @@ group :test do
 end
 
 gem "hotwire-livereload", "~> 2.0", :group => :development
+
+gem "simple_form", "~> 5.3"
+
+gem "faker", "~> 3.5"
+
+gem "devise", "~> 4.9"
+
+gem "tailwind_devise", "~> 0.0.3"
+
+gem "friendly_id", "~> 5.5"
+
+gem "geocoder", "~> 1.8"
+
+gem "ransack", "~> 4.3"
+
+gem "public_activity", "~> 3.0"
+
+gem "rolify", "~> 6.0"
+
+gem "pundit", "~> 2.5"

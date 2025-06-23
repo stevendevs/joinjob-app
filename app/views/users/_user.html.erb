@@ -1,0 +1,66 @@
+<!-- User Profile View -->
+<div class="max-w-2xl mx-auto p-6 bg-white">
+  <div class="space-y-6">
+    
+    <!-- Email Section -->
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-sm text-gray-600">Email</p>
+      <p class="text-lg font-medium text-gray-900"><%= user.email %></p>
+    </div>
+    
+    <!-- Sign up info -->
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-sm text-gray-600">Member since</p>
+      <p class="text-gray-900">Signed up <%= time_ago_in_words(user.created_at) %> ago</p>
+    </div>
+    
+    <!-- Roles Section -->
+    <div class="border-b border-gray-200 pb-4">
+      <p class="text-sm text-gray-600 mb-2">Roles</p>
+      <div class="flex flex-wrap gap-2">
+        <% user.roles.each do |role| %>
+          <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"><%= role.name %></span>
+        <% end %>
+      </div>
+    </div>
+    
+    <!-- Login Statistics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-gray-200 pb-4">
+      <div>
+        <p class="text-sm text-gray-600">Sign in count</p>
+        <p class="text-gray-900"><%= user.sign_in_count %></p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-600">Current sign in</p>
+        <p class="text-gray-900"><%= user.current_sign_in_at %></p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-600">Last sign in</p>
+        <p class="text-gray-900"><%= user.last_sign_in_at %></p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-600">Current IP</p>
+        <p class="text-gray-900 font-mono text-sm"><%= user.current_sign_in_ip %></p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-600">Last IP</p>
+        <p class="text-gray-900 font-mono text-sm"><%= user.last_sign_in_ip %></p>
+      </div>
+    </div>
+    
+    <!-- Email Confirmation -->
+    <div>
+      <p class="text-sm text-gray-600">Email confirmed</p>
+      <% if user.confirmed_at.present? %>
+        <p class="text-green-600 font-medium">Yes</p>
+      <% else %>
+        <p class="text-red-600 font-medium">No</p>
+      <% end %>
+    </div>
+    
+  </div>
+</div>
